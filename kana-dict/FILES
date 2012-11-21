@@ -1,0 +1,33 @@
+Flash card sets for Japanaese kana
+==================================
+
+hiragana.tsv
+katakana.tsv
+
+    Basic hiragana and katakana syllabary, without diacritics and youon.
+    Includes obsolete kana for WA-column. Does not include hiragana "archaic
+    E" (U+1B000), "archaic YE" (U+1B001), rare katakana YI, YE, and WU
+    (absent from Unicode as of version 6.1).
+
+hiragana-ext.tsv
+katakana-ext.tsv
+
+    Extended hiragana and katakana syllabary: signs with dakuten, handakuten,
+    and youon, used for Japanese language. Includes obsolete closed youon
+    (KWA, GWA). Does not include Ryukyuan/Okinawan KWI, KWE, GWI, GWE, HWA,
+    HWI, HWE.
+
+hiragana-alien.tsv
+
+    Phonetic extensions to hiragana: NG-column, vu (v-).
+
+katakana-alien.tsv
+
+    Phonetic and Ainu extensions to katakana.
+
+-----------------------------------------------------------------------------
+NOTE: Some characters in the "alien kana" files are decomposed. This is
+      inevitable, because current version of Unicode doesn't contain some
+      precomposed voicing combinations (handakuten on KA-row for [ng], Ainu
+      handakuten on TE and TO/TSU katakana). All other voicing combinations
+      are normalized to NFKC.

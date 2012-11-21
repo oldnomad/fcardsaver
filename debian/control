@@ -1,0 +1,58 @@
+Source: fcardsaver
+Section: x11
+Priority: extra
+Maintainer: Alec Kojaev <alec@kojaev.name>
+Build-Depends: debhelper (>= 8.0.0), libqt4-dev (>= 4.7.0), libx11-dev (>= 2:1.0.0),
+ perl (>= 5.10.0), libtext-csv-xs-perl, xsltproc (>= 1.1.26),
+ grep (>= 2.0), gzip (>= 1.2.4), docbook2x (>= 0.8.8), docbook-xml (>= 4.5)
+Standards-Version: 3.9.3
+#Homepage: <insert the upstream URL, if relevant>
+
+Package: fcardsaver-bin
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: fcardsaver-cards-japanese
+Description: Flashcard-displaying screen saver.
+ FCardSaver is a screensaver for X11 that displays flashcards from
+ Anki-compatible flashcard set plain text files.
+
+Package: fcardsaver-cards-japanese
+Architecture: all
+Depends: fcardsaver-cards-kana, fcardsaver-cards-kanjidic2, ${misc:Depends}
+Description: Japanese language cards for FCardSaver (metapackage).
+ FCardSaver is a screensaver for X11 that displays flashcards from
+ Anki-compatible flashcard set plain text files.
+ .
+ This is a meta-package for all FCardSaver card sets for Japanese language
+ learners.
+
+Package: fcardsaver-cards-kana
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: fcardsaver, fonts-kanjistrokeorders
+Description: Japanese kana cards for FCardSaver.
+ FCardSaver is a screensaver for X11 that displays flashcards from
+ Anki-compatible flashcard set plain text files.
+ .
+ Following card sets are included:
+ .
+ - Kana readings for hiragana and katakana, including obsolete characters
+   and combinations and combinations used for Ryukyuan and Ainu.
+   Contains 6 card set files (hiragana/katakana, basic/extended/alien).
+
+Package: fcardsaver-cards-kanjidic2
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: fcardsaver, fonts-hanazono, fonts-kanjistrokeorders
+Description: Japanese kanji cards for FCardSaver.
+ FCardSaver is a screensaver for X11 that displays flashcards from
+ Anki-compatible flashcard set plain text files.
+ .
+ Following card sets are included:
+ .
+ - Kanji translations and readings: 10 categorized card set files (grades 1-6
+   of kyouiku kanji, other jouyou kanji, jinmeiyou kanji 1-2, hyougaiji) and
+   1 combined card set file (all kanji).
+ .
+ All data are from KANJIDIC2 project, available at
+ <http://www.csse.monash.edu.au/~jwb/kanjidic2/>.

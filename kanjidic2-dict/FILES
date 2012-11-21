@@ -1,0 +1,26 @@
+Flash card sets for Japanaese kanji
+===================================
+
+kanjidic2-G1.tsv ... kanjidic2-G6.tsv
+
+    Kyouiku kanji for grades 1 to 6, respectively.
+
+kanjidic2-jouyou.tsv
+
+    Jouyou kanji not included into kyouiku lists.
+
+kanjidic2-jinmei.tsv
+
+    Jinmeiyou kanji, excluding variants.
+
+kanjidic2-itai.tsv
+
+    Jinmeiyou kanji variants (itaiji).
+
+kanjidic2-hyougai.tsv
+
+    Unlisted kanji (hyougaiji).
+
+kanjidic2.tsv
+
+    All kanji, regardless of their class.

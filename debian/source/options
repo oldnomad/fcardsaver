@@ -1,0 +1,3 @@
+# Exclude Win32 build directories
+tar-ignore = "build/*-win32/*"
+tar-ignore = "build/fcardss-install.exe"

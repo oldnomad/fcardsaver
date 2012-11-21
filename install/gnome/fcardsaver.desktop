@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Flash Card Screensaver
+Comment=Screensaver displaying flash cards from predefined sets.
+TryExec=fcardsaver
+Exec=fcardsaver -root
+StartupNotify=false
+Terminal=false
+Type=Application
+Categories=Screensaver;
+OnlyShowIn=GNOME;XFCE
