@@ -3,6 +3,7 @@
 #
 QMAKE       := qmake
 MAKE        := make
+MKDIR       := mkdir -m 755 -p
 
 QTSPEC      := linux-g++
 PLATFORM    := linux
@@ -48,6 +49,7 @@ src/$(EXEMAKEFILE): src/fcardsaver.pro
 	cd src && $(QMAKE) -makefile "CONFIG += $(EXETARGET)" fcardsaver.pro -r -spec $(QTSPEC)
 
 $(EXEPATH)/$(EXEFILE): src/$(EXEMAKEFILE)
+	$(MKDIR) $(EXEPATH)
 	$(MAKE) -C src -f $(EXEMAKEFILE) first
 
 exec-install: src/$(EXEMAKEFILE) $(EXEPATH)/$(EXEFILE)

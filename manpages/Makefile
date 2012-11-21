@@ -8,7 +8,10 @@ MKDIR := mkdir -m 755 -p
 INSTALL_FILE := install -m 644 -p
 DELETE_FILE := rm -f
 
-all: $(MANGZFILES)
+all: make-dirs $(MANGZFILES)
+
+make-dirs:
+	$(MKDIR) $(BUILD_DIR)
 
 $(BUILD_DIR)/%.gz: $(BUILD_DIR)/%
 	gzip -9 -c $< >$@
@@ -24,4 +27,4 @@ install:
 
 uninstall:
 
-.PHONY: all clean distclean install uninstall
+.PHONY: make-dirs all clean distclean install uninstall

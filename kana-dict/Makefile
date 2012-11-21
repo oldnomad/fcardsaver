@@ -11,7 +11,8 @@ DELETE_FILE := rm -f
 all: $(DICTFILES)
 
 $(DICTFILES): kana.tsv hiragana.header katakana.header
-	./build-kana.pl "$(OBJDIR)"
+	$(MKDIR) $(OBJDIR)
+	./build-kana.pl $(OBJDIR)
 
 install: $(DICTFILES)
 	$(MKDIR) $(CARDDIR)

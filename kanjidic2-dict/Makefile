@@ -17,6 +17,7 @@ download:
 	wget -nd http://www.csse.monash.edu.au/~jwb/kanjidic2/kanjidic2.xml.gz
 
 $(DICTFILE_ALL): kanjidic2.header kanjidic2.xslt kanjidic2.xml.gz
+	$(MKDIR) $(OBJDIR)
 	gunzip -c kanjidic2.xml.gz | xsltproc --stringparam "header" "$$(cat kanjidic2.header)" -o "$@" kanjidic2.xslt -
 
 $(DICTFILES): kanjidic2.header $(DICTFILE_ALL)
