@@ -77,7 +77,9 @@ windows {
 MOC_DIR = $${OBJECTS_DIR}
 RCC_DIR = $${OBJECTS_DIR}
 UI_DIR = $${OBJECTS_DIR}
-TARGET = $${OBJECTS_DIR}/$${TARGET}
+isEmpty(DESTDIR) {
+    DESTDIR = $${OBJECTS_DIR}
+}
 unix {
     binary.files = $${OBJECTS_DIR}/fcardsaver
     binary.path = /usr/bin/

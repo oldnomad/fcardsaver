@@ -78,8 +78,6 @@ Section "${PRODUCT}"
         '"$INSTDIR\Uninstall.exe"'
     WriteRegStr HKLM "${REG_UNINSTALL}" "InstallLocation" "$INSTDIR"
 
-    # TODO: Install docs
-
     SetOutPath $SYSDIR
     Push $0
     StrCpy $0 ""
