@@ -37,8 +37,8 @@ Description: Japanese kana cards for FCardSaver.
  .
  Following card sets are included:
  .
- - Kana readings for hiragana and katakana, including obsolete characters
-   and combinations and combinations used for Ryukyuan and Ainu.
+ - Kana readings for hiragana and katakana, including obsolete characters,
+   and characters and combinations used for Ryukyuan and Ainu.
    Contains 6 card set files (hiragana/katakana, basic/extended/alien).
 
 Package: fcardsaver-cards-kanjidic2
@@ -51,9 +51,13 @@ Description: Japanese kanji cards for FCardSaver.
  .
  Following card sets are included:
  .
- - Kanji translations and readings: 10 categorized card set files (grades 1-6
-   of kyouiku kanji, other jouyou kanji, jinmeiyou kanji 1-2, hyougaiji) and
-   1 combined card set file (all kanji).
+ - Kanji translations and readings:
+    * 10 categorized card set files:
+       - grades 1-6 of kyouiku kanji;
+       - other jouyou kanji;
+       - jinmeiyou kanji (jinmeiyou proper and kyuujitai/itaiji);
+       - hyougaiji included in the dictionary;
+    * 1 combined card set file (all kanji).
  .
  All data are from KANJIDIC2 project, available at
  <http://www.csse.monash.edu.au/~jwb/kanjidic2/>.
