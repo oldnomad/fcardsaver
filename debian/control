@@ -30,7 +30,7 @@ Description: Japanese language cards for FCardSaver (metapackage).
 Package: fcardsaver-cards-kana
 Architecture: all
 Depends: ${misc:Depends}
-Recommends: fcardsaver, fonts-kanjistrokeorders
+Recommends: fcardsaver-bin, fonts-kanjistrokeorders
 Description: Japanese kana cards for FCardSaver.
  FCardSaver is a screensaver for X11 that displays flashcards from
  Anki-compatible flashcard set plain text files.
@@ -44,7 +44,7 @@ Description: Japanese kana cards for FCardSaver.
 Package: fcardsaver-cards-kanjidic2
 Architecture: all
 Depends: ${misc:Depends}
-Recommends: fcardsaver, fonts-hanazono, fonts-kanjistrokeorders
+Recommends: fcardsaver-bin, fonts-hanazono, fonts-kanjistrokeorders
 Description: Japanese kanji cards for FCardSaver.
  FCardSaver is a screensaver for X11 that displays flashcards from
  Anki-compatible flashcard set plain text files.
