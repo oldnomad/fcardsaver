@@ -1,3 +1,11 @@
+fcardsaver (1.2) precise; urgency=low
+
+  * Refactoring for settings object.
+  * New configuration parameter for dictionary root path.
+  * BUG: Assertion failure on empty/non-existent cell list in the configuration.
+
+ -- Alec Kojaev <alec@kojaev.name>  Sat, 08 Dec 2012 19:49:45 +0400
+
 fcardsaver (1.1ubuntu2) precise; urgency=low
 
   * Cleanup debian package descriptions.

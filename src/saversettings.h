@@ -5,11 +5,12 @@
 #include <QStringList>
 #include <QList>
 #include <QColor>
+#include <QDir>
 #include "card/cardset.h"
 #include "card/carddisplay.h"
 #include "util/csvfile.h"
 
-class SaverSettings
+class SaverSettings : public CardDisplay
 {
 public:
     static const QString PLAINTEXT_PATTERN;
@@ -18,20 +19,20 @@ public:
 
     SaverSettings();
     SaverSettings(const SaverSettings& other) :
+        CardDisplay(other),
         m_trace(other.m_trace),
+        m_cardset_root(other.m_cardset_root),
         m_cardset_files(other.m_cardset_files),
-        m_cardset(other.m_cardset),
-        m_carddisplay(other.m_carddisplay) {}
+        m_cardset(other.m_cardset) {}
 
     QColor trace() const { return m_trace; }
+    const QDir& cardSetRoot() const { return m_cardset_root; }
     const QList<CsvFile>& cardSetFiles() const { return m_cardset_files; }
     const CardSet& cardSet() const { return m_cardset; }
-    const CardDisplay& cardDisplay() const { return m_carddisplay; }
-    CardDisplay& cardDisplay() { return m_carddisplay; }
 
     void setTrace(QColor trace) { m_trace = trace; }
+    void setCardSetRoot(const QDir& root) { m_cardset_root = root; }
     void setCardSetFiles(const QList<CsvFile>& files) { m_cardset_files = files; }
-    void setCardDisplay(const CardDisplay& display) { m_carddisplay = display; }
 
     void reset();
     void read();
@@ -51,9 +52,9 @@ private:
     static const QStringList    DEFAULT_CARDSETS;
 
     QColor         m_trace;        // Cell trace color, if any
+    QDir           m_cardset_root; // Card set files root
     QList<CsvFile> m_cardset_files;// Card set files
     CardSet        m_cardset;      // Card set to use
-    CardDisplay    m_carddisplay;  // Default card display parameters
 };
 
 #endif // SAVERSETTINGS_H

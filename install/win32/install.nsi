@@ -98,6 +98,7 @@ Section "${PRODUCT}"
     ReadRegDWORD $DICT_LAST HKCU "${REG_CONFIG}\cardsets" "size"
     SetShellVarContext all
     StrCpy $DICT_PATH "$APPDATA\ALKOSoft\FCardSaver"
+    # TODO: Read data root path, when implemented
     CreateDirectory "$DICT_PATH"
 SectionEnd
 
@@ -258,7 +259,6 @@ Section "Uninstall"
     ${UninstallLib} DLL SHARED REBOOT_PROTECTED "$SYSDIR\QtCore4.dll"
     ${UninstallLib} DLL SHARED REBOOT_PROTECTED "$SYSDIR\QtGui4.dll"
 
-    # TODO: Uninstall docs
     Delete "$INSTDIR\Uninstall.exe"
     RMDir $INSTDIR
 

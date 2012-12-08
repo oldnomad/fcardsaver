@@ -100,3 +100,7 @@ void CardDisplay::setValues(const CardDisplay &other)
 {
     base_t::operator =(other);
 }
+
+void CardDisplay::removeValue(int index) {
+    base_t::remove(index);
+}

@@ -64,7 +64,7 @@ int SaverWindow::nextCard()
 {
     m_index = qrand();
     m_card = m_set.cardSet().get(m_index);
-    m_display = m_set.cardDisplay();
+    m_display = m_set;
     m_display += m_card.display();
     return m_display.period();
 }

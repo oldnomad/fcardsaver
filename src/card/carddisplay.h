@@ -21,12 +21,12 @@ public:
     void debugPrint() const;
 
     void clear();
-    int maxIndex() const { return base_t::keys().last(); }
+    int maxIndex() const { return isEmpty() ? -1 : base_t::keys().last(); }
     void setMaxIndex(int index);
     CardCell value(int index) const { return base_t::value(index, CardCell::NULL_CELL); }
     void setValue(int index, const CardCell& cell);
     void setValues(const CardDisplay& other);
-    void removeValue(int index) { base_t::remove(index); }
+    void removeValue(int index);
 
     QColor background() const { return m_background; }
     void setBackground(const QColor& color) { m_background = color; }

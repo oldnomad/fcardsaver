@@ -14,6 +14,7 @@ namespace Attr {
         const QString TRACE_COLOR = "general/trace";
         const QString BACKGROUND_COLOR = "general/background";
         const QString PERIOD = "general/period";
+        const QString DATA_ROOT = "general/data-root";
     }
     namespace Display {
         const QString ARRAY = "display";
@@ -50,7 +51,7 @@ const double        SaverSettings::TEXTCELL_SCALE = 0.95;
 const QString       SaverSettings::TEXTCELL_STYLE = "* { color: %1; }\n";
 
 SaverSettings::SaverSettings() :
-    m_trace(), m_cardset_files(), m_cardset(), m_carddisplay()
+    CardDisplay(), m_trace(), m_cardset_root(), m_cardset_files(), m_cardset()
 {
     reset();
 }
@@ -59,14 +60,16 @@ void SaverSettings::reset()
 {
     m_trace = DEFAULT_TRACECLR;
 
+    m_cardset_root = startup_t::get_data_root();
+
     m_cardset_files.clear();
     m_cardset.clear();
 
-    m_carddisplay.clear();
-    m_carddisplay.setBackground(DEFAULT_BACKGROUND);
-    m_carddisplay.setPeriod(DEFAULT_PERIOD);
-    m_carddisplay.setSplitX(DEFAULT_SPLITX);
-    m_carddisplay.setSplitY(DEFAULT_SPLITY);
+    clear();
+    setBackground(DEFAULT_BACKGROUND);
+    setPeriod(DEFAULT_PERIOD);
+    setSplitX(DEFAULT_SPLITX);
+    setSplitY(DEFAULT_SPLITY);
 
     CardCell cell;
     cell.setTextColor(DEFAULT_TEXTCOLOR);
@@ -74,25 +77,23 @@ void SaverSettings::reset()
     for (int i = 0; i < DEFAULT_CELLS.size(); i++)
     {
         cell.setPos(DEFAULT_CELLS[i]);
-        m_carddisplay.setValue(i, cell);
+        setValue(i, cell);
     }
 }
 
 void SaverSettings::loadCardSet()
 {
     m_cardset.clear();
-    QDir fileRoot = startup_t::get_data_root();
-    // TODO: Settings parameter for data root
     foreach (CsvFile file, m_cardset_files)
     {
-        if (!file.open(CsvFile::FLAG_ANKI|CsvFile::FLAG_COMMENT, fileRoot))
+        if (!file.open(CsvFile::FLAG_ANKI|CsvFile::FLAG_COMMENT, m_cardset_root))
         {
             qWarning("Loading '%s': ERROR: %s",
                      qPrintable(file.path()),
                      qPrintable(file.lastError()));
             continue;
         }
-        int cnt = m_cardset.loadCsv(m_carddisplay, file);
+        int cnt = m_cardset.loadCsv(*this, file);
         file.close();
         if (cnt < 0)
             qWarning("Loading '%s': ERROR: %d", qPrintable(file.path()), cnt);
@@ -114,19 +115,26 @@ void SaverSettings::read()
     TextConv::toIntList(set.value(Attr::General::SPLIT_X), splX);
     TextConv::toIntList(set.value(Attr::General::SPLIT_Y), splY);
     if (!splX.isEmpty())
-        m_carddisplay.setSplitX(splX);
+        setSplitX(splX);
     if (!splY.isEmpty())
-        m_carddisplay.setSplitY(splY);
+        setSplitY(splY);
 
-    QColor background =
+    QColor bgd =
             TextConv::toColor(set.value(Attr::General::BACKGROUND_COLOR).toString(),
-                              m_carddisplay.background());
-    m_carddisplay.setBackground(background);
+                              background());
+    setBackground(bgd);
 
-    int period = set.value(Attr::General::PERIOD,
-                           QVariant(m_carddisplay.period())).toInt();
-    if (period >= CardDisplay::MIN_PERIOD && period <= CardDisplay::MAX_PERIOD)
-        m_carddisplay.setPeriod(period);
+    int per = set.value(Attr::General::PERIOD, QVariant(period())).toInt();
+    if (per >= CardDisplay::MIN_PERIOD && per <= CardDisplay::MAX_PERIOD)
+        setPeriod(per);
+
+    QString root = set.value(Attr::General::DATA_ROOT,
+                             m_cardset_root.absolutePath()).toString();
+    if (!root.isEmpty())
+    {
+        m_cardset_root.setPath(root);
+        m_cardset_root.makeAbsolute();
+    }
 
     int ncells = set.beginReadArray(Attr::Display::ARRAY);
     QList<CardCell> cells;
@@ -147,8 +155,9 @@ void SaverSettings::read()
     }
     set.endArray();
     for (int i = 0; i < cells.size(); i++)
-        m_carddisplay.setValue(i, cells[i]);
-    m_carddisplay.setMaxIndex(cells.size() - 1);
+        setValue(i, cells[i]);
+    if (!cells.isEmpty())
+        setMaxIndex(cells.size() - 1);
 
     int ncardsets = set.beginReadArray(Attr::CardSet::ARRAY);
     qDebug("Reading cardsets [%d]", ncardsets);
@@ -180,21 +189,24 @@ bool SaverSettings::write() const
     set.setIniCodec("UTF-8");
 
     set.setValue(Attr::General::SPLIT_X,
-                 TextConv::fromIntList(m_carddisplay.splitX()));
+                 TextConv::fromIntList(splitX()));
     set.setValue(Attr::General::SPLIT_Y,
-                 TextConv::fromIntList(m_carddisplay.splitY()));
+                 TextConv::fromIntList(splitY()));
 
     set.setValue(Attr::General::BACKGROUND_COLOR,
-                 TextConv::fromColor(m_carddisplay.background()));
+                 TextConv::fromColor(background()));
     set.setValue(Attr::General::PERIOD,
-                 QVariant(m_carddisplay.period()));
+                 QVariant(period()));
     set.setValue(Attr::General::TRACE_COLOR,
                  TextConv::fromColor(m_trace));
+
+    set.setValue(Attr::General::DATA_ROOT, m_cardset_root.absolutePath());
+
     set.beginWriteArray(Attr::Display::ARRAY);
-    for (int i = 0; i <= m_carddisplay.maxIndex(); i++)
+    for (int i = 0; i <= maxIndex(); i++)
     {
         set.setArrayIndex(i);
-        const CardCell& cell = m_carddisplay.value(i);
+        const CardCell& cell = value(i);
         set.setValue(Attr::Display::CELL, cell.posAsString());
         set.setValue(Attr::Display::TEXT_COLOR,
                      TextConv::fromColor(cell.textColor()));

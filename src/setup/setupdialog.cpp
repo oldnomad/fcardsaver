@@ -5,7 +5,6 @@
 #include "setup/setupfilesmodel.h"
 #include "setup/setupsplitmodel.h"
 #include "setup/setupsplitdelegate.h"
-#include "platform/startup.h"
 #include "ui_setupdialog.h"
 
 const QString SetupDialog::FILE_FILTERS(
@@ -25,12 +24,12 @@ SetupDialog::SetupDialog(SaverSettings& set, QWidget *parent) :
 
     m_ui->periodSpinner->setMinimum(CardDisplay::MIN_PERIOD/1000.0);
     m_ui->periodSpinner->setMaximum(CardDisplay::MAX_PERIOD/1000.0);
-    m_ui->periodSpinner->setValue(m_set.cardDisplay().period()/1000.0);
-    m_ui->colorButton->setColorValue(m_set.cardDisplay().background());
+    m_ui->periodSpinner->setValue(m_set.period()/1000.0);
+    m_ui->colorButton->setColorValue(m_set.background());
 
-    m_ui->rowsSpinner->setValue(m_set.cardDisplay().splitX().size());
-    m_ui->colsSpinner->setValue(m_set.cardDisplay().splitY().size());
-    m_split_model = new SetupSplitModel(m_set.cardDisplay(), this);
+    m_ui->rowsSpinner->setValue(m_set.splitX().size());
+    m_ui->colsSpinner->setValue(m_set.splitY().size());
+    m_split_model = new SetupSplitModel(m_set, this);
     m_ui->cellTable->setModel(m_split_model);
     m_ui->cellTable->setItemDelegate(m_split_delegate);
     m_ui->cellTable->resizeColumnsToContents();
@@ -78,7 +77,7 @@ void SetupDialog::cellColumnCount(int value)
 
 void SetupDialog::csetAddClicked()
 {
-    QDir rootDir = startup_t::get_data_root();
+    QDir rootDir = m_set.cardSetRoot();
     QStringList files =
             QFileDialog::getOpenFileNames(this, QString(), rootDir.path() + '/',
                                           FILE_FILTERS);
@@ -103,14 +102,13 @@ void SetupDialog::csetDelClicked()
 
 void SetupDialog::accept()
 {
-    CardDisplay& display = m_set.cardDisplay();
     QColor bgd = m_ui->colorButton->colorValue();
     if (bgd.isValid() && bgd.alpha() != 0)
-        display.setBackground(bgd);
-    display.setPeriod((int)(m_ui->periodSpinner->value()*1000));
-    display.setSplitX(m_split_model->display().splitX());
-    display.setSplitY(m_split_model->display().splitY());
-    display.setValues(m_split_model->display());
+        m_set.setBackground(bgd);
+    m_set.setPeriod((int)(m_ui->periodSpinner->value()*1000));
+    m_set.setSplitX(m_split_model->display().splitX());
+    m_set.setSplitY(m_split_model->display().splitY());
+    m_set.setValues(m_split_model->display());
     m_set.setCardSetFiles(m_files_model->files());
     QDialog::accept();
 }
