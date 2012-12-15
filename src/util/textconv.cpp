@@ -1,4 +1,4 @@
-#include "textconv.h"
+#include "util/textconv.h"
 
 QString TextConv::fromChar(QChar value)
 {

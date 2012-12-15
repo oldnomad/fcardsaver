@@ -1,5 +1,5 @@
 #include <QColorDialog>
-#include "colorbutton.h"
+#include "util/colorbutton.h"
 
 ColorButton::ColorButton(QWidget *parent) :
     QPushButton(parent), m_color()

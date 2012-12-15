@@ -1,5 +1,5 @@
 #include <QStringListIterator>
-#include "cmdoption.h"
+#include "util/cmdoption.h"
 
 bool CmdOption::parseCmdLine(const QStringList &args,
                              const parse_t& parse,

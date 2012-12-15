@@ -1,12 +1,14 @@
 #
 # Main build file for FCardSaver
 #
-QMAKE       := qmake
-MAKE        := make
-MKDIR       := mkdir -m 755 -p
-
-QTSPEC      := linux-g++
-PLATFORM    := linux
+ifndef PLATFORM
+    include platform.mk
+endif
+ifeq ($(PLATFORM),win32)
+    QTSPEC  := win32-mingw
+else
+    QTSPEC  := linux-g++
+endif
 EXEMAKEFILE := Makefile_$(PLATFORM)
 EXETARGET   := release
 

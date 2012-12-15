@@ -1,6 +1,7 @@
 #!/usr/bin/perl -w
 use Text::CSV_XS;
 use Unicode::Normalize;
+use warnings;
 
 use constant DEFAULT_DESTDIR => '../build/dict';
 use constant KANA_FILE => 'kana.tsv';

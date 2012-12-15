@@ -210,6 +210,11 @@
             <listitem>Card display time, in milliseconds. Default value is
                       <literal>3000</literal> (3 sec).</listitem>
           </varlistentry>
+          <varlistentry>
+            <term><command>data-root</command> <replaceable>path</replaceable> (config only)</term>
+            <listitem>Path to directory used as a root for flash card set
+                      files. Default value depends on the platform.</listitem>
+          </varlistentry>
         </variablelist>
       </refsect2>
       <refsect2>
@@ -282,6 +287,9 @@
               <command>path</command> and <command>separator</command>,
               specifying path to a flash card set file and delimiter
               character used by this file.</para>
+        <para>Both absolute and relative paths may be specified. Relative
+              paths are resolved relative to data root path (see configuration
+              parameter <command>data-root</command>).</para>
       </refsect2>
       <refsect2>
         <title>Card set file inclusion</title>
@@ -309,7 +317,7 @@
         <varlistentry>
           <term><filename class="directory">/usr/share/fcardsaver/</filename> (X11)</term>
           <term><filename class="directory"><envar>%CommonAppData%</envar>\ALKOSoft\FCardSaver\</filename> (MS Windows)</term>
-          <listitem><simpara>Base directory for flash card set files.</simpara></listitem>
+          <listitem><simpara>Default data root directory.</simpara></listitem>
         </varlistentry>
       </variablelist>
     </refsect1>

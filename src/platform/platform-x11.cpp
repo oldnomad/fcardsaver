@@ -1,4 +1,4 @@
-#include "startup.h"
+#include "platform/startup.h"
 
 #ifdef Q_OS_UNIX
 

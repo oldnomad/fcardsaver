@@ -7,13 +7,13 @@ tab-separated text dictionary files compatible with FCardSaver.
 
 Prerequisites for running the tools are:
 
-   - POSIX-compatible shell, 'grep(1)' and 'cat(1)' commands.
+   - Perl 5 or higher.
    - xsltproc tool from LibXSLT library, supporting EXSLT extensions
      <http://exslt.org/strings> and <http://exslt.org/functions>.
 
 If you want to update the dictionaries, do following:
 
-   1a. Run 'make download'. This downloads the GZipped KANJIDIC2 XML file.
+   1a. Run 'make download'. This re-downloads the GZipped KANJIDIC2 XML file.
 
 _OR_
 

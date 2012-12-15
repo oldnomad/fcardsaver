@@ -1,3 +1,13 @@
+fcardsaver (1.2.1) UNRELEASED; urgency=low
+
+  * Kanji set generation moved to a perl script; now we can drop
+    dependence on grep.
+  * General Makefile cleanup; all external commands used are now
+    defined variables to prepare for mingw-make build on Win32.
+  * Minor code cleanup for Win32 build.
+
+ -- Alec Kojaev <alec@kojaev.name>  Sat, 15 Dec 2012 22:53:52 +0400
+
 fcardsaver (1.2) precise; urgency=low
 
   * Refactoring for settings object.
