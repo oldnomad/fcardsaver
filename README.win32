@@ -1,0 +1,44 @@
+Building FCardSaver in MS Windows
+=================================
+
+For building FCardSaver in MS Windows you'll need following prerequisites:
+
+    - QT SDK version 4.7.0 or higher.
+    - MinGW compiler set (built-in in QT SDK or separate).
+    - Perl 5.10 or higher (for example, ActiveState Perl).
+    - Perl module Text::CSV_XS.
+    - LibXSLT version 1.1.26 or higher, including xsltproc binary.
+    - GZip version 1.2.4 or higher.
+    - Optionally, WGet (any version).
+    - DocBook XML 4.5 DTD, accessible to xsltproc.
+    - DocBook XSL-NS stylesheets version 1.76.1 or higher.
+    - NSIS version 2.46 or higher.
+    - NSIS extension library "LogicLib.nsh".
+    - NSIS plug-in "nsArray".
+    - NSIS plug-in "nsDialogs".
+    - NSIS plug-in "nsUnzip".
+    - NSIS plug-in "Inetc".
+
+To build the project, run make utility from MinGW set (mingw-make.exe) in
+the root directory of the project.
+
+By default, project makefiles expect that qmake (from QT SDK), perl, xsltproc,
+gzip, wget, and makensis (from NSIS) are in path, and that DocBook XSL-NS
+stylesheets are in directory "docbook-xsl-ns" in the root of the current disk.
+If any of these conditions is not met, you can pass corresponding paths to
+mingw-make in variables on the command line:
+
+    - Variables QMAKE, PERL, XSLTPROC, GZIP, WGET, MAKENSIS specify full path
+      to corresponding binary.
+    - Variable DOCBOOK_XSL specifies full path to the root directory of DocBook
+      XSL-NS stylesheets, with forward slash (/) as a sirectory separator.
+
+Not that spaces in paths are not supported, so, for example, path to directory
+"C:\Program Files" must be specified as "c:/progra~1".
+
+As an alternative, yo can change corresponding paths in file "platform.mk" in
+the root of the project.
+
+Installer built by the makefiles includes some MinGW and QT dll's. These dll's
+are included in the project. If you want to update them, replace the files in
+subdirectory "install/win32/lib".

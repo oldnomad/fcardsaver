@@ -8,7 +8,9 @@ ifeq ($(OS),Windows_NT)
     GZIP          := gzip
     WGET          := wget
     XSLTPROC      := xsltproc
+    DOCBOOK_XSL   := /docbook-xsl-ns
     PERL          := perl
+    MAKENSIS      := makensis
 else
     PLATFORM      := linux
     QMAKE         := qmake
@@ -19,7 +21,6 @@ else
     GZIP          := gzip
     WGET          := wget
     XSLTPROC      := xsltproc
+    DOCBOOK_XSL   := /usr/share/xml/docbook/stylesheet/docbook-xsl-ns
     PERL          := perl
-    DB2X_XSLTPROC := db2x_xsltproc
-    DB2X_MANXML   := db2x_manxml
 endif

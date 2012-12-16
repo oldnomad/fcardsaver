@@ -22,11 +22,11 @@ DICTUNINST  := $(addsuffix -uninstall,$(DICTDIRS))
 DICTCLEAN   := $(addsuffix -clean,$(DICTDIRS))
 DICTDCLEAN  := $(addsuffix -distclean,$(DICTDIRS))
 
-all: exec-build man-build dict-build
+all: exec-build docs-build dict-build win32-build
 install: exec-install kde4-install gnome-install dict-install
 uninstall: exec-uninstall kde4-install gnome-install dict-uninstall
-clean: exec-clean man-clean dict-clean
-distclean: exec-distclean man-distclean dict-distclean
+clean: exec-clean docs-clean dict-clean
+distclean: exec-distclean docs-distclean dict-distclean
 
 dict-build: $(DICTBUILD)
 dict-install: $(DICTINSTALL)
@@ -37,7 +37,7 @@ dict-distclean: $(DICTDCLEAN)
 .PHONY: all install uninstall clean distclean
 .PHONY: dict-build dict-install dict-uninstall dict-clean dict-distclean
 .PHONY: exec-build exec-install exec-uninstall exec-clean exec-distclean
-.PHONY: man-build man-clean man-distclean
+.PHONY: docs-build docs-clean docs-distclean
 .PHONY: kde4-install kde4-uninstall
 .PHONY: gnome-install gnome-uninstall
 .PHONY: $(DICTBUILD) $(DICTINSTALL) $(DICTUNINST) $(DICTCLEAN) $(DICTDCLEAN)
@@ -67,19 +67,20 @@ exec-distclean: src/$(EXEMAKEFILE)
 	$(MAKE) -C src -f $(EXEMAKEFILE) distclean
 
 #
-# Manual docs
+# Manual and docs
 #
-man-build:
-	$(MAKE) -C manpages all
+docs-build:
+	$(MAKE) -C docs all
 
-man-clean:
-	$(MAKE) -C manpages clean
+docs-clean:
+	$(MAKE) -C docs clean
 
-man-distclean:
-	$(MAKE) -C manpages distclean
+docs-distclean:
+	$(MAKE) -C docs distclean
 
 #
 # KDE & GNOME screensaver installation
+# Win32 installer build
 #
 kde4-install:
 	$(MAKE) -C install install-kde4
@@ -92,6 +93,9 @@ gnome-install:
 
 gnome-uninstall:
 	$(MAKE) -C install uninstall-gnome
+
+win32-build:
+	$(MAKE) -c install win32-build
 
 #
 # Dictionaries install/uninstall

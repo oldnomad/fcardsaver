@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Alec Kojaev <alec@kojaev.name>
 Build-Depends: debhelper (>= 8.0.0), libqt4-dev (>= 4.7.0), libx11-dev (>= 2:1.0.0),
  perl (>= 5.10.0), libtext-csv-xs-perl, xsltproc (>= 1.1.26), gzip (>= 1.2.4),
- docbook2x (>= 0.8.8), docbook-xml (>= 4.5)
+ docbook-xml (>= 4.5), docbook-xsl-ns (>= 1.76.1)
 Standards-Version: 3.9.3
 Vcs-Git: git://github.com/oldnomad/fcardsaver.git
 Vcs-Browser: https://github.com/oldnomad/fcardsaver

@@ -1,13 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
     "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<article>
+<article xmlns="http://docbook.org/ns/docbook">
   <title>FCardSaver Manual</title>
 
   <refentry>
     <refmeta>
       <refentrytitle>fcardsaver</refentrytitle>
       <manvolnum>6x</manvolnum>
+      <refmiscinfo class="source">fcardsaver</refmiscinfo>
+      <refmiscinfo class="manual">FCardSaver Manual</refmiscinfo>
     </refmeta>
     <refnamediv>
       <refname>fcardsaver</refname>
@@ -117,14 +119,23 @@
       <para>When a card is displayed, configuration parameters used for it are
             looked up in following order:
             <orderedlist>
-              <listitem>Parameters specified in the same card set file prior
-                        to the card (the latest specification gets precedence).</listitem>
-              <listitem>If this card set file is included into another file,
-                        parameters specified in the including file prior to
-                        the inclusion point (the latest specification gets
-                        precedence).</listitem>
-              <listitem>Parameters specified in the configuration (configuration
-                        file or registry key).</listitem>
+              <listitem>
+                <simpara>Parameters specified in the same card set file prior
+                         to the card (the latest specification gets precedence).
+                </simpara>
+              </listitem>
+              <listitem>
+                <simpara>If this card set file is included into another file,
+                         parameters specified in the including file prior to
+                         the inclusion point (the latest specification gets
+                         precedence).
+                </simpara>
+              </listitem>
+              <listitem>
+                <simpara>Parameters specified in the configuration (configuration
+                         file or registry key).
+                </simpara>
+              </listitem>
             </orderedlist></para>
       <refsect2>
         <title>Syntaxes</title>
@@ -138,45 +149,54 @@
         <variablelist>
           <varlistentry>
             <term>Text strings</term>
-            <listitem>Text strings in parameter values specified in a card set file
-                      use double-quote character ('"') for quoting and backslash
-                      character ('\') for escaping double-quote character inside
-                      the string. Any string containing whitespace, comma, or
-                      double-quote character, must be quoted.</listitem>
+            <listitem>
+              <simpara>Text strings in parameter values specified in a card set file
+                       use double-quote character ('"') for quoting and backslash
+                       character ('\') for escaping double-quote character inside
+                       the string. Any string containing whitespace, comma, or
+                       double-quote character, must be quoted.
+              </simpara>
+            </listitem>
           </varlistentry>
           <varlistentry>
             <term>Floating-point values</term>
-            <listitem>Floating-point numbers in parameter values specified in a card
-                      set file use dot character ('.') as fractional part separator.</listitem>
+            <listitem>
+              <simpara>Floating-point numbers in parameter values specified in a card
+                       set file use dot character ('.') as fractional part separator.
+              </simpara>
+            </listitem>
           </varlistentry>
           <varlistentry>
             <term>Color values</term>
-            <listitem><simpara>Color values are specified as a text containing color name or
-                      color definition.</simpara>
-                      <simpara>Color definition is given as
-                               <literal>"#<replaceable>RGB</replaceable>"</literal>,
-                               where each of <replaceable>R</replaceable>, <replaceable>G</replaceable>
-                               and <replaceable>B</replaceable> is a hexadecimal
-                               number specifying corresponding color component
-                               (red, green, or blue). Numbers may contain from
-                               1 to 4 hexadecimal digits, but all components
-                               must use the same number of digits.</simpara>
-                      <simpara>Color name can be any of SVG color keyword names.
-                               In some cases additional values <literal>"transparent"</literal>
-                               and empty string are accepted to specify absence
-                               of color.</simpara></listitem>
+            <listitem>
+              <simpara>Color values are specified as a text containing color name or
+                       color definition.</simpara>
+              <simpara>Color definition is given as <literal>"#<replaceable>RGB</replaceable>"</literal>,
+                       where each of <replaceable>R</replaceable>, <replaceable>G</replaceable>
+                       and <replaceable>B</replaceable> is a hexadecimal number
+                       specifying corresponding color component (red, green, or
+                       blue). Numbers may contain from 1 to 4 hexadecimal digits,
+                       but all components must use the same number of digits.
+              </simpara>
+              <simpara>Color name can be any of SVG color keyword names. In some
+                       cases additional values <literal>"transparent"</literal>
+                       and empty string are accepted to specify absence of color.
+              </simpara>
+            </listitem>
           </varlistentry>
           <varlistentry>
             <term>Single-character values</term>
-            <listitem><simpara>Single-character values (for example, card set file
-                               delimiter character) are specified as a text containing
-                               single character or character definition.</simpara>
-                      <simpara>Character definition is given as
-                               <literal>"#<replaceable>CCCC</replaceable>"</literal>,
-                               where <replaceable>CCCC</replaceable> is hexadecimal
-                               Unicode code point number. For example,
-                               <literal>"#0009"</literal> specifies Unicode character
-                               "U+0009 CHARACTER TABULATION".</simpara></listitem>
+            <listitem>
+              <simpara>Single-character values (for example, card set file delimiter
+                       character) are specified as a text containing single
+                       character or character definition.
+              </simpara>
+              <simpara>Character definition is given as <literal>"#<replaceable>CCCC</replaceable>"</literal>,
+                       where <replaceable>CCCC</replaceable> is hexadecimal Unicode
+                       code point number. For example, <literal>"#0009"</literal>
+                       specifies Unicode character "U+0009 CHARACTER TABULATION".
+              </simpara>
+            </listitem>
           </varlistentry>
         </variablelist>
       </refsect2>
@@ -190,30 +210,44 @@
         <variablelist termlength="5" spacing="normal">
           <varlistentry>
             <term><command>background</command> <replaceable>color</replaceable></term>
-            <listitem>Card background color. Default value is
-                      <literal>black</literal>.</listitem>
+            <listitem>
+              <simpara>Card background color. Default value is <literal>black</literal>.
+              </simpara>
+            </listitem>
           </varlistentry>
           <varlistentry>
             <term><command>split-{x|y}</command> <replaceable>size</replaceable>,...</term>
-            <listitem>Relative size of columns or rows of the card. Size can
-                      be specified in arbitrary units, so, say, <userinput>3,4,3</userinput>
-                      and <userinput>15,20,15</userinput> specify the same
-                      split. Default value for both splits is <literal>20,60,20</literal>.</listitem>
+            <listitem>
+              <simpara>Relative size of columns or rows of the card. Size can
+                       be specified in arbitrary units, so, say, <userinput>3,4,3</userinput>
+                       and <userinput>15,20,15</userinput> specify the same
+                       split. Default value for both splits is <literal>20,60,20</literal>.
+              </simpara>
+            </listitem>
           </varlistentry>
           <varlistentry>
             <term><command>trace</command> <replaceable>color</replaceable> (config only)</term>
-              <listitem>Cell trace color. Cell trace can used to debug card split.
-                        Default value is empty string (no trace).</listitem>
+            <listitem>
+              <simpara>Cell trace color. Cell trace can used to debug card split.
+                       Default value is empty string (no trace).
+              </simpara>
+            </listitem>
           </varlistentry>
           <varlistentry>
             <term><command>period</command> <replaceable>msec</replaceable></term>
-            <listitem>Card display time, in milliseconds. Default value is
-                      <literal>3000</literal> (3 sec).</listitem>
+            <listitem>
+              <simpara>Card display time, in milliseconds. Default value is
+                       <literal>3000</literal> (3 sec).
+              </simpara>
+            </listitem>
           </varlistentry>
           <varlistentry>
             <term><command>data-root</command> <replaceable>path</replaceable> (config only)</term>
-            <listitem>Path to directory used as a root for flash card set
-                      files. Default value depends on the platform.</listitem>
+            <listitem>
+              <simpara>Path to directory used as a root for flash card set
+                       files. Default value depends on the platform.
+              </simpara>
+            </listitem>
           </varlistentry>
         </variablelist>
       </refsect2>
@@ -229,41 +263,59 @@
         <variablelist>
           <varlistentry>
             <term><command>cell</command> <replaceable>cell-x</replaceable>,<replaceable>cell-y</replaceable></term>
-            <listitem>Column and row of the cell where the fact will
-                      be displayed. Value <literal>-1</literal> for
-                      any coordinate marks the fact as not displayed.</listitem>
+            <listitem>
+              <simpara>Column and row of the cell where the fact will
+                       be displayed. Value <literal>-1</literal> for
+                       any coordinate marks the fact as not displayed.
+              </simpara>
+            </listitem>
           </varlistentry>
           <varlistentry>
             <term><command>color</command> <replaceable>color</replaceable></term>
-            <listitem>Specifies default text color for the displayed fact.
-                      Default value is <literal>white</literal>.</listitem>
+            <listitem>
+              <simpara>Specifies default text color for the displayed fact.
+                       Default value is <literal>white</literal>.
+              </simpara>
+            </listitem>
           </varlistentry>
           <varlistentry>
             <term><command>font</command> <replaceable>font-family</replaceable></term>
-            <listitem>Specifies default text font family for the displayed fact.
-                      Default value is <literal>Helvetica</literal>.</listitem>
+            <listitem>
+              <simpara>Specifies default text font family for the displayed fact.
+                       Default value is <literal>Helvetica</literal>.
+              </simpara>
+            </listitem>
           </varlistentry>
           <varlistentry>
             <term><command>lines</command> <replaceable>num-lines</replaceable></term>
-            <listitem>Specifies approximate number of lines for the displayed fact.
-                      May be non-integer. If this parameter is specified and positive,
-                      its value is used to calculate initial default font size. Font
-                      size may be further decremented if the text of the fact doesn't
-                      fit in the cell. Default value is <literal>0</literal>.</listitem>
+            <listitem>
+              <simpara>Specifies approximate number of lines for the displayed fact.
+                       May be non-integer. If this parameter is specified and positive,
+                       its value is used to calculate initial default font size. Font
+                       size may be further decremented if the text of the fact doesn't
+                       fit in the cell. Default value is <literal>0</literal>.
+              </simpara>
+            </listitem>
           </varlistentry>
           <varlistentry>
             <term><command>pattern</command> <replaceable>pattern-text</replaceable></term>
-            <listitem>Specifies fact text preprocessing pattern. Pattern is a non-empty
-                      text string containing sequence <literal>"%1"</literal>. If pattern
-                      is specified, each occurence of this sequence is replaced by the
-                      fact text, and the result is used instead of the original text.
-                      Default value is empty string (no pattern).</listitem>
+            <listitem>
+              <simpara>Specifies fact text preprocessing pattern. Pattern is a non-empty
+                       text string containing sequence <literal>"%1"</literal>. If pattern
+                       is specified, each occurence of this sequence is replaced by the
+                       fact text, and the result is used instead of the original text.
+                       Default value is empty string (no pattern).
+              </simpara>
+            </listitem>
           </varlistentry>
           <varlistentry>
             <term><command>stylesheet</command> <replaceable>stylesheet-text</replaceable></term>
-            <listitem>Specifies CSS stylesheet for the displayed fact. Only a subset
-                      of CSS supported by Qt library may be specified.
-                      Default value is empty string (use default stylesheet).</listitem>
+            <listitem>
+              <simpara>Specifies CSS stylesheet for the displayed fact. Only a subset
+                       of CSS supported by Qt library may be specified.
+                       Default value is empty string (use default stylesheet).
+              </simpara>
+            </listitem>
           </varlistentry>
         </variablelist>
         <para>Display parameter sets may be also specified in the flash card set file
@@ -338,6 +390,8 @@
     <refmeta>
       <refentrytitle>fcardsaver-cardset</refentrytitle>
       <manvolnum>7</manvolnum>
+      <refmiscinfo class="source">fcardsaver</refmiscinfo>
+      <refmiscinfo class="manual">FCardSaver Manual</refmiscinfo>
     </refmeta>
     <refnamediv>
       <refname>fcardsaver-cardset</refname>

@@ -1,8 +1,8 @@
+ifndef PLATFORM
+    include ../platform.mk
+endif
 KDE4_PATH := /usr/share/kde4/services/ScreenSavers
 GNOME_PATH := /usr/share/applications/screensavers
-MKDIR := mkdir -m 755 -p
-INSTALL_FILE := install -m 644 -p
-DELETE_FILE := rm -f
 
 all clean distclean:
 
@@ -24,5 +24,8 @@ install-gnome:
 uninstall-gnome:
 	$(DELETE_FILE) $(DESTDIR)$(GNOME_PATH)/fcardsaver.desktop
 
+win32-build:
+	$(MAKE) -C win32
+
 .PHONY: all install clean distclean
-.PHONY: install-kde4 install-gnome
+.PHONY: install-kde4 install-gnome win32-build
