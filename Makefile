@@ -95,7 +95,7 @@ gnome-uninstall:
 	$(MAKE) -C install uninstall-gnome
 
 win32-build:
-	$(MAKE) -c install win32-build
+	$(MAKE) -C install win32-build
 
 #
 # Dictionaries install/uninstall

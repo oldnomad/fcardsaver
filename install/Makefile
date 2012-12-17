@@ -24,8 +24,12 @@ install-gnome:
 uninstall-gnome:
 	$(DELETE_FILE) $(DESTDIR)$(GNOME_PATH)/fcardsaver.desktop
 
+ifeq ($(PLATFORM),win32)
 win32-build:
 	$(MAKE) -C win32
+else
+win32-build:
+endif
 
 .PHONY: all install clean distclean
 .PHONY: install-kde4 install-gnome win32-build
