@@ -10,16 +10,16 @@ DICTFILES := $(addprefix $(OBJDIR)/,$(DICTNAMES))
 all: $(DICTFILES)
 
 $(DICTFILES): kana.tsv hiragana.header katakana.header
-	$(MKDIR) $(OBJDIR)
+	$(MKDIR) "$(OBJDIR)"
 	$(PERL) -w build-kana.pl $(OBJDIR)
 
 install: $(DICTFILES)
-	$(MKDIR) $(CARDDIR)
+	$(MKDIR) "$(CARDDIR)"
 	$(INSTALL_FILE) $(DICTFILES) $(CARDDIR)
 
 uninstall:
 	$(DELETE_FILE) $addprefix($(CARDDIR),$(DICTNAMES))
-	$(RMDIR) $(CARDDIR)
+	$(RMDIR) "$(CARDDIR)"
 
 clean distclean:
 	$(DELETE_FILE) $(DICTFILES)

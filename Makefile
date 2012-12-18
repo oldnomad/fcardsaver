@@ -4,11 +4,7 @@
 ifndef PLATFORM
     include platform.mk
 endif
-ifeq ($(PLATFORM),win32)
-    QTSPEC  := win32-mingw
-else
-    QTSPEC  := linux-g++
-endif
+QTSPEC      := $(PLATFORM)-g++
 EXEMAKEFILE := Makefile_$(PLATFORM)
 EXETARGET   := release
 
@@ -51,7 +47,7 @@ src/$(EXEMAKEFILE): src/fcardsaver.pro
 	cd src && $(QMAKE) -makefile "CONFIG += $(EXETARGET)" fcardsaver.pro -r -spec $(QTSPEC)
 
 $(EXEPATH)/$(EXEFILE): src/$(EXEMAKEFILE)
-	$(MKDIR) $(EXEPATH)
+	$(MKDIR) "$(EXEPATH)"
 	$(MAKE) -C src -f $(EXEMAKEFILE) first
 
 exec-install: src/$(EXEMAKEFILE) $(EXEPATH)/$(EXEFILE)

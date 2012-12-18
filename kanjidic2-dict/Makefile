@@ -20,19 +20,19 @@ kanjidic2.xml.gz:
 	$(WGET) -nd http://www.csse.monash.edu.au/~jwb/kanjidic2/kanjidic2.xml.gz
 
 $(DICTFILE_ALL): kanjidic2.header kanjidic2.xslt kanjidic2.xml.gz
-	$(MKDIR) $(OBJDIR)
+	$(MKDIR) "$(OBJDIR)"
 	$(GZIP) -d -c kanjidic2.xml.gz | $(XSLTPROC) --stringparam "header" "$$(cat kanjidic2.header)" -o "$@" kanjidic2.xslt -
 
 $(DICTFILES): $(DICTFILE_ALL)
-	$(PERL) -w split-kanji.pl $(DICTFILE_ALL) "$(OBJDIR)/kanjidic2-%s.tsv" $(DICTS)
+	$(PERL) -w split-kanji.pl $(DICTFILE_ALL) '$(OBJDIR)/kanjidic2-%s.tsv' $(DICTS)
 
 install: $(DICTFILE_ALL) $(DICTFILES)
-	$(MKDIR) $(CARDDIR)
-	$(INSTALL_FILE) $(DICTFILE_ALL) $(DICTFILES) $(CARDDIR)
+	$(MKDIR) "$(CARDDIR)"
+	$(INSTALL_FILE) $(DICTFILE_ALL) $(DICTFILES) "$(CARDDIR)"
 
 uninstall:
 	$(DELETE_FILE) $addprefix($(CARDDIR),$(DICT_ALL) $(DICTNAMES))
-	$(RMDIR) $(CARDDIR)
+	$(RMDIR) "$(CARDDIR)"
 
 clean distclean:
 	$(DELETE_FILE) $(DICTFILE_ALL) $(DICTFILES)
