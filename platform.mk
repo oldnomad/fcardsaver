@@ -1,7 +1,7 @@
 ifeq ($(OS),Windows_NT)
     PLATFORM      := win32
     QMAKE         := qmake
-    MKDIR         := cmd /s /c:"if not exist ^"%1^" mkdir ^"%1^""
+    MKDIR         := -mkdir
     RMDIR         := rmdir
     INSTALL_FILE  := copy /y
     DELETE_FILE   := del

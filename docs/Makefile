@@ -10,7 +10,7 @@ HTMLDOC := $(BUILD_DIR)/fcardsaver-manual.html
 all: make-dirs $(MANGZFILES) $(HTMLDOC)
 
 make-dirs:
-	$(MKDIR) $(BUILD_DIR)
+	$(MKDIR) "$(BUILD_DIR)"
 
 $(BUILD_DIR)/%.gz: $(BUILD_DIR)/%
 	$(GZIP) -9 -c $< >$@
@@ -22,9 +22,7 @@ $(HTMLDOC): fcardsaver-manual.docbook
 	$(XSLTPROC) -o $@ $(DOCBOOK_XSL)/xhtml/docbook.xsl $<
 
 clean distclean:
-	$(DELETE_FILE) $(MANFILES)
-	$(DELETE_FILE) $(MANGZFILES)
-	$(DELETE_FILE) $(HTMLDOC)
+	$(DELETE_FILE) $(MANFILES) $(MANGZFILES) $(HTMLDOC)
 
 install:
 

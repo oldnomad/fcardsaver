@@ -33,10 +33,13 @@ mingw-make in variables on the command line:
     - Variable DOCBOOK_XSL specifies full path to the root directory of DocBook
       XSL-NS stylesheets, with forward slash (/) as a sirectory separator.
 
-Not that spaces in paths are not supported, so, for example, path to directory
+Note that spaces in paths are not supported, so, for example, path to directory
 "C:\Program Files" must be specified as "c:/progra~1".
 
-As an alternative, yo can change corresponding paths in file "platform.mk" in
+File "make-win32-example.bat" contains an example of pre-setting paths for a
+Win32 build.
+
+As an alternative, you can change corresponding paths in file "platform.mk" in
 the root of the project.
 
 Installer built by the makefiles includes some MinGW and QT dll's. These dll's

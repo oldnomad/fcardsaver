@@ -8,7 +8,7 @@
 
 <xsl:output method="text" encoding="utf-8"/>
 
-<xsl:param name="header"/>
+<xsl:param name="header_inc"  select="document('kanjidic2.header.inc')"/>
 
 <xsl:param name="separator"   select="'&#x9;'"/>
 <xsl:param name="newline"     select="'&#xA;'"/>
@@ -25,7 +25,7 @@
 </func:function>
 
 <xsl:template match="/">
-    <xsl:value-of select="$header"/>
+    <xsl:value-of select="$header_inc"/>
     <xsl:value-of select="$newline"/>
     <xsl:apply-templates select="//character"/>
 </xsl:template>

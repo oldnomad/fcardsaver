@@ -21,7 +21,7 @@ kanjidic2.xml.gz:
 
 $(DICTFILE_ALL): kanjidic2.header kanjidic2.xslt kanjidic2.xml.gz
 	$(MKDIR) "$(OBJDIR)"
-	$(GZIP) -d -c kanjidic2.xml.gz | $(XSLTPROC) --stringparam "header" "$$(cat kanjidic2.header)" -o "$@" kanjidic2.xslt -
+	$(GZIP) -d -c kanjidic2.xml.gz | $(XSLTPROC) -o "$@" kanjidic2.xslt -
 
 $(DICTFILES): $(DICTFILE_ALL)
 	$(PERL) -w split-kanji.pl $(DICTFILE_ALL) '$(OBJDIR)/kanjidic2-%s.tsv' $(DICTS)
