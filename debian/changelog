@@ -4,7 +4,7 @@ fcardsaver (1.2.2) UNRELEASED; urgency=low
     docbook-xsl-ns for documentation generation instead.
   * Generate XHTML manual.
   * Makefile cleanup in install directory.
-  * Initial attempt at Win32 build.
+  * Successful Win32 build.
 
  -- Alec Kojaev <alec@kojaev.name>  Sun, 16 Dec 2012 17:04:36 +0400
 
