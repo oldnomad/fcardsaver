@@ -10,7 +10,6 @@ For building FCardSaver in MS Windows you'll need following prerequisites:
     - LibXSLT version 1.1.26 or higher, including xsltproc binary.
     - GZip version 1.2.4 or higher.
     - Optionally, WGet (any version).
-    - DocBook XML 4.5 DTD, accessible to xsltproc.
     - DocBook XSL-NS stylesheets version 1.76.1 or higher.
     - NSIS version 2.46 or higher.
     - NSIS extension library "LogicLib.nsh".

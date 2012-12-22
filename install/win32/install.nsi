@@ -96,9 +96,11 @@ Section "${PRODUCT}"
     Pop $0
 
     ReadRegDWORD $DICT_LAST HKCU "${REG_CONFIG}\cardsets" "size"
-    SetShellVarContext all
-    StrCpy $DICT_PATH "$APPDATA\ALKOSoft\FCardSaver"
-    # TODO: Read data root path, when implemented
+    ReadRegStr $DICT_PATH HKCU "${REG_CONFIG}\general" "data-root"
+    ${If} $DICT_PATH == ""
+        SetShellVarContext all
+        StrCpy $DICT_PATH "$APPDATA\ALKOSoft\FCardSaver"
+    ${EndIf}
     CreateDirectory "$DICT_PATH"
 SectionEnd
 

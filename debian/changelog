@@ -6,6 +6,8 @@ fcardsaver (1.2.2) UNRELEASED; urgency=low
   * Makefile cleanup in install directory.
   * Successful Win32 build.
   * Added newly-created GitHub page as a homepage.
+  * Fix separators in "data-root" saving.
+  * Read "data-root" in Win32 installer.
 
  -- Alec Kojaev <alec@kojaev.name>  Sun, 16 Dec 2012 17:04:36 +0400
 

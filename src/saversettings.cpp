@@ -200,7 +200,8 @@ bool SaverSettings::write() const
     set.setValue(Attr::General::TRACE_COLOR,
                  TextConv::fromColor(m_trace));
 
-    set.setValue(Attr::General::DATA_ROOT, m_cardset_root.absolutePath());
+    set.setValue(Attr::General::DATA_ROOT,
+                 QDir::toNativeSeparators(m_cardset_root.absolutePath()));
 
     set.beginWriteArray(Attr::Display::ARRAY);
     for (int i = 0; i <= maxIndex(); i++)
