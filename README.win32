@@ -1,3 +1,24 @@
+Security note
+=============
+
+In theory, Win32 version of FCardSaver can be used as an attack vector.
+The installer installs a stub file "fcardss.scr" into %SYSDIR%. This file
+runs actual FCardSaver executable from the installation directory. The path
+to the executable is taken from a value in the uninstall registry section
+of FCardSaver:
+
+   Hive:  HKEY_LOCAL_MACHINE
+   Key:   Software\Microsoft\Windows\CurrentVersion\Uninstall\FCardScreensaver
+   Value: RunExecutable
+
+Attacker might try to replace this registry value to make the stub run another
+executable. However, to do this, attacker will need write access to the key,
+which, by default, is allowed only to System account, Administrators group,
+and Power Users group. Running with such accounts gives the attacker write
+access to many other registry keys, many of which are more dangerous attack
+vectors.
+
+
 Building FCardSaver in MS Windows
 =================================
 

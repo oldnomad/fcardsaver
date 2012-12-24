@@ -4,6 +4,7 @@
 !define PRODUCT     "Flash Card Screensaver"
 !define PUBLISHER   "ALKOSoft"
 !define BLD_MAIN    "..\..\build\release-win32"
+!define BLD_STUB    "..\..\build\stub-win32"
 !define BLD_DICT    "..\..\build\dict"
 !define REG_CONFIG  "Software\ALKOSoft\FCardSaver"
 !define REG_UNINSTALL \
@@ -13,10 +14,6 @@
 !include LogicLib.nsh
 !include nsArray.nsh
 !include nsDialogs.nsh
-
-!include Library.nsh
-!define InstallLib      "!insertmacro InstallLib"
-!define UninstallLib    "!insertmacro UninstallLib"
 
 OutFile         "..\..\build\fcardss-install.exe"
 SetCompressor   lzma
@@ -77,23 +74,17 @@ Section "${PRODUCT}"
     WriteRegStr HKLM "${REG_UNINSTALL}" "UninstallString" \
         '"$INSTDIR\Uninstall.exe"'
     WriteRegStr HKLM "${REG_UNINSTALL}" "InstallLocation" "$INSTDIR"
+    WriteRegStr HKLM "${REG_UNINSTALL}" "RunExecutable" "$INSTDIR\fcardsaver.exe"
+
+    SetOutPath $INSTDIR
+    File "${BLD_MAIN}\fcardsaver.exe"
+    File "lib\libgcc_s_dw2-1.dll"
+    File "lib\mingwm10.dll"
+    File "lib\QtCore4.dll"
+    File "lib\QtGui4.dll"
 
     SetOutPath $SYSDIR
-    Push $0
-    StrCpy $0 ""
-    ${If} ${FileExists} "$SYSDIR\fcardss.scr"
-        StrCpy $0 "1"
-    ${EndIf}
-    File /oname=fcardss.scr "${BLD_MAIN}\fcardsaver.exe"
-    ${InstallLib} DLL $0 NOREBOOT_PROTECTED \
-        "lib\libgcc_s_dw2-1.dll" "$SYSDIR\libgcc_s_dw2-1.dll" $SYSDIR
-    ${InstallLib} DLL $0 NOREBOOT_PROTECTED \
-        "lib\mingwm10.dll" "$SYSDIR\mingwm10.dll" $SYSDIR
-    ${InstallLib} DLL $0 NOREBOOT_PROTECTED \
-        "lib\QtCore4.dll" "$SYSDIR\QtCore4.dll" $SYSDIR
-    ${InstallLib} DLL $0 NOREBOOT_PROTECTED \
-        "lib\QtGui4.dll" "$SYSDIR\QtGui4.dll" $SYSDIR
-    Pop $0
+    File "${BLD_STUB}\fcardss.scr"
 
     ReadRegDWORD $DICT_LAST HKCU "${REG_CONFIG}\cardsets" "size"
     ReadRegStr $DICT_PATH HKCU "${REG_CONFIG}\general" "data-root"
@@ -256,10 +247,12 @@ FunctionEnd
 
 Section "Uninstall"
     Delete "$SYSDIR\fcardss.scr"
-    ${UninstallLib} DLL SHARED REBOOT_PROTECTED "$SYSDIR\libgcc_s_dw2-1.dll"
-    ${UninstallLib} DLL SHARED REBOOT_PROTECTED "$SYSDIR\mingwm10.dll"
-    ${UninstallLib} DLL SHARED REBOOT_PROTECTED "$SYSDIR\QtCore4.dll"
-    ${UninstallLib} DLL SHARED REBOOT_PROTECTED "$SYSDIR\QtGui4.dll"
+
+    Delete "$INSTDIR\fcardsaver.exe"
+    Delete "$INSTDIR\libgcc_s_dw2-1.dll"
+    Delete "$INSTDIR\mingwm10.dll"
+    Delete "$INSTDIR\QtCore4.dll"
+    Delete "$INSTDIR\QtGui4.dll"
 
     Delete "$INSTDIR\Uninstall.exe"
     RMDir $INSTDIR
