@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="FCardSaver : Flash Card Screensaver (X11/WinAPI)." />
+    <meta name="description" content="FCardSaver : Flash Card Screensaver (X11/WinAPI)" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -19,7 +19,7 @@
           <a id="forkme_banner" href="https://github.com/oldnomad/fcardsaver">View on GitHub</a>
 
           <h1 id="project_title">FCardSaver</h1>
-          <h2 id="project_tagline">Flash Card Screensaver (X11/WinAPI).</h2>
+          <h2 id="project_tagline">Flash Card Screensaver (X11/WinAPI)</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/oldnomad/fcardsaver/zipball/master">Download this project as a .zip file</a>
@@ -39,13 +39,13 @@
 
 <p>Binary builds for Ubuntu 12.04 LTS (Precise Pangolin) are available at my <a href="https://launchpad.net/%7Ethe-old-nomad/+archive/fcardsaver">PPA</a>. These builds also install without problems on Ubuntu 12.10 (Quantal Quetzal).</p>
 
-<p>Binary builds for Microsoft Windows are not provided yet. FCardSaver builds successfully on Windows, but there are some problems with the installer. In particular, current installer installs Qt and MinGW runtime DLLs directly in <code>%SYSDIR%</code>. This can be a problem if you are using another Qt-dependent or MinGW-dependent application that requires newer DLLs than those included in FCardSaver installer.</p>
+<p>Binary builds for Microsoft Windows are not provided yet.</p>
 
 <h3>Historical notes</h3>
 
 <p>Long-long ago there existed two screensavers for people studying Japanese language: <a href="http://kde-apps.org/content/show.php/kanjisaver?content=31660">kanjisaver</a> that displayed kanji from the JLPT set, and <a href="http://kde-look.org/content/show.php/kannasaver?content=16792">kannasaver</a> that displayed kana, both by Ryan Schultz. Unfortunately, both projects were eventually orphaned (kanjisaver <a href="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=510529">here</a> and kannasaver <a href="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=510534">here</a>), and, as a result, dropped from Debian and from most Debian-based distributions, including Ubuntu which I use. Kannasaver was temporarily <a href="https://looksblo.wordpress.com/2011/02/10/kannasaver-1-2-for-kde-4-released/">resurrected</a> in February 2011 by another maintainer, but after two releases dropped from the radar again.</p>
 
-<p>For some time I lived with an old version of kannasaver, patching it to the best of my ability, but it wasn't a good experience for sure. Pretty soon I was thinking about writing a screensaver of my own, unifying functionality of both old screensavers. After one or two false starts I finally settled on the functionality that I want from the screensaver, and, in spring 2012, started writing. I chose Qt as a framework because I wanted the screensaver to work both under KDE and under Microsoft Windows, which I still have to use at work.</p>
+<p>For some time I lived with an old version of kannasaver, patching it to the best of my ability, but it wasn't a good experience for sure. Pretty soon I was thinking about writing a screensaver of my own, unifying functionality of both old screensavers. After one or two false starts I finally settled on the functionality that I want from the screensaver, and, in the autumn of 2012, the screensaver ran for the first time. I chose Qt as a framework because I wanted the screensaver to work both under KDE and under Microsoft Windows, which I still have to use at work.</p>
 
 <p>Pretty soon the project started to grow and become more and more generic. Not satisfied by simply displaying a kanji or a kana character in the centre of the screen, it now could display arbitrary data in a rectangular grid. Kanji and kana sets, instead of being hard-coded as in the old screensavers, migrated to external files in format pretty close to that used by <a href="http://ankisrs.net/">Anki</a>. For kanji set generation I used a comprehensive and well-maintained <a href="http://www.csse.monash.edu.au/%7Ejwb/kanjidic2/">KANJIDIC2</a> dictionary.</p>
 
