@@ -1,4 +1,3 @@
-#include <algorithm>
 #include "setup/setupsplitmodel.h"
 
 SetupSplitModel::SetupSplitModel(const CardDisplay& display, QObject *parent) :
@@ -87,9 +86,9 @@ bool SetupSplitModel::setData(const QModelIndex &index, const QVariant &value,
         int row1 = oldCell.pos_y() + 1, row2 = cell.pos_y() + 1;
         int col1 = oldCell.pos_x() + 1, col2 = cell.pos_x() + 1;
         if (row1 > row2)
-            std::swap(row1, row2);
+            qSwap(row1, row2);
         if (col1 > col2)
-            std::swap(col1, col2);
+            qSwap(col1, col2);
         emit dataChanged(createIndex(row1, col1), createIndex(row2, col2));
     }
     return true;

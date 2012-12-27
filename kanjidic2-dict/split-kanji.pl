@@ -29,7 +29,7 @@ while (<SOURCE>)
     unless (defined $file)
     {
         my $filename = sprintf($DST, $mode);
-        printf STDERR "Created file %s\n", $filename;
+        printf STDERR "Creating file %s\n", $filename;
         open $file, '>', $filename or die "$!";
         printf $file "# Kanji %s\n", $mode;
         printf $file "%s\n", $_ foreach (@HEADER);

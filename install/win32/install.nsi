@@ -5,6 +5,7 @@
 !define PUBLISHER   "ALKOSoft"
 !define BLD_MAIN    "..\..\build\release-win32"
 !define BLD_STUB    "..\..\build\stub-win32"
+!define BLD_LIBS    "..\..\build\libs-win32"
 !define BLD_DICT    "..\..\build\dict"
 !define REG_CONFIG  "Software\ALKOSoft\FCardSaver"
 !define REG_UNINSTALL \
@@ -78,10 +79,10 @@ Section "${PRODUCT}"
 
     SetOutPath $INSTDIR
     File "${BLD_MAIN}\fcardsaver.exe"
-    File "lib\libgcc_s_dw2-1.dll"
-    File "lib\mingwm10.dll"
-    File "lib\QtCore4.dll"
-    File "lib\QtGui4.dll"
+    File "${BLD_LIBS}\libgcc_s_dw2-1.dll"
+    File "${BLD_LIBS}\mingwm10.dll"
+    File "${BLD_LIBS}\QtCore4.dll"
+    File "${BLD_LIBS}\QtGui4.dll"
 
     SetOutPath $SYSDIR
     File "${BLD_STUB}\fcardss.scr"

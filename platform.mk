@@ -1,5 +1,6 @@
 ifeq ($(OS),Windows_NT)
     PLATFORM      := win32
+    CXXVERSION    := g++-4.6
     QMAKE         := qmake
     MKDIR         := -mkdir
     RMDIR         := rmdir
@@ -13,6 +14,7 @@ ifeq ($(OS),Windows_NT)
     MAKENSIS      := makensis
 else
     PLATFORM      := linux
+    CXXVERSION    := g++
     QMAKE         := qmake
     MKDIR         := mkdir -m 755 -p
     RMDIR         := rmdir

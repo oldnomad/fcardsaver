@@ -29,10 +29,11 @@ static LONG get_exe_path()
     return ERROR_SUCCESS;
 }
 
-static DWORD WINAPI wait_thread(LPVOID handle)
+static DWORD WINAPI wait_thread(LPVOID param)
 {
     MSG msg;
 
+    (void)param;    // UNUSED
     // We need this thread because Windows insists that a screensaver
     // must have a message queue.
     while (GetMessage(&msg, NULL, 0, 0))
@@ -50,6 +51,10 @@ int CALLBACK WinMain(HINSTANCE hInst, HINSTANCE hPrevInst,
     STARTUPINFO start;
     PROCESS_INFORMATION proc;
 
+    (void)hInst;        // UNUSED
+    (void)hPrevInst;    // UNUSED
+    (void)lpCmdLine;    // UNUSED
+    (void)nCmdShow;     // UNUSED
     if ((lRes = get_exe_path()) != ERROR_SUCCESS)
         return 0;
     if (EXE_PATH[0] == '\0')

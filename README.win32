@@ -22,46 +22,120 @@ vectors.
 Building FCardSaver in MS Windows
 =================================
 
+1. Prerequisites
+----------------
+
 For building FCardSaver in MS Windows you'll need following prerequisites:
 
-    - QT SDK version 4.7.0 or higher.
-    - MinGW compiler set (built-in in QT SDK or separate).
-    - Perl 5.10 or higher (for example, ActiveState Perl).
-    - Perl module Text::CSV_XS.
-    - LibXSLT version 1.1.26 or higher, including xsltproc binary.
-    - GZip version 1.2.4 or higher.
-    - Optionally, WGet (any version).
-    - DocBook XSL-NS stylesheets version 1.76.1 or higher.
-    - NSIS version 2.46 or higher.
-    - NSIS extension library "LogicLib.nsh".
-    - NSIS plug-in "nsArray".
-    - NSIS plug-in "nsDialogs".
-    - NSIS plug-in "nsUnzip".
-    - NSIS plug-in "Inetc".
+    - Qt framework version 4.7.0 or higher.
 
-To build the project, run make utility from MinGW set (mingw-make.exe) in
-the root directory of the project.
+    - MinGW compiler set (built-in in QT SDK or separate). MinGW binaries
+      must be in path.
 
-By default, project makefiles expect that qmake (from QT SDK), perl, xsltproc,
-gzip, wget, and makensis (from NSIS) are in path, and that DocBook XSL-NS
-stylesheets are in directory "docbook-xsl-ns" in the root of the current disk.
-If any of these conditions is not met, you can pass corresponding paths to
-mingw-make in variables on the command line:
+      Note that binary distributions of Qt framework are built using GCC 4.4.
+      GCC versions 4.7 and higher broke binary compatibility with earlier
+      versions, so you must either use GCC version 4.6 or lower, or recompile
+      Qt framework using GCC version 4.7 or higher yourself.
 
-    - Variables QMAKE, PERL, XSLTPROC, GZIP, WGET, MAKENSIS specify full path
-      to corresponding binary.
-    - Variable DOCBOOK_XSL specifies full path to the root directory of DocBook
-      XSL-NS stylesheets, with forward slash (/) as a sirectory separator.
+    - Perl 5.10 or higher (for example, ActiveState Perl) with Perl module
+      Text::CSV_XS. This module is included in the default distribution of
+      ActiveState Perl.
+
+    - LibXSLT version 1.1.26 or higher, including xsltproc binary. Note that
+      the version included in GNUWin32 project is broken. Download clean
+      version from <ftp://ftp.zlatkovic.com/libxml>.
+
+    - GZip version 1.2.4 or higher and, optionally, WGet (any version).
+      Versions included in GNUWin32, MSYS, or any other Win32 versions, should
+      work. GNUWin32 can be downloaded from <http://gnuwin32.sourceforge.net/>.
+      MSYS packages can be downloaded from <http://www.mingw.org/>.
+
+    - DocBook XSL-NS stylesheets version 1.76.1 or higher. Download links for
+      DocBook XSL-NS are available at on the DocBook Project at
+      <http://sourceforge.net/projects/docbook/files/docbook-xsl-ns/>. 
+
+    - NSIS version 2.46 or higher. Following NSIS extensions are required:
+        * NSIS extension library "LogicLib.nsh".
+        * NSIS plug-in "nsArray".
+        * NSIS plug-in "nsDialogs".
+        * NSIS plug-in "nsUnzip".
+        * NSIS plug-in "Inetc".
+
+By default, project makefiles expect that qmake (from Qt framework), perl,
+xsltproc, gzip, wget, and makensis (from NSIS) are in path, and that DocBook
+XSL-NS stylesheets are in directory "docbook-xsl-ns" in the root of the current
+disk. If any of these conditions is not met, you can pass corresponding paths
+to mingw-make in variables on the command line (see below).
 
 Note that spaces in paths are not supported, so, for example, path to directory
-"C:\Program Files" must be specified as "c:/progra~1".
+"C:\Program Files" must be specified as "c:\progra~1".
 
-File "make-win32-example.bat" contains an example of pre-setting paths for a
-Win32 build.
+2. Versions of Qt framework and MinGW
+-------------------------------------
+
+The build was tested with Qt versions 4.7 and 4.8. Whether the build works or
+not for higher and lower versions is not known.
+
+By default, build Makefile supposes that MinGW-GCC version is higher than 4.6.
+If that's not so, you need to specify make variable CXXVERSION (see below).
+
+Installer built by the makefiles includes some MinGW and Qt DLLs. These DLLs
+are copied from QT framework and MinGW used for building the project. Note that
+the installer uses file names "QCore4.dll" and "QGui4.dll" for Qt DLLs, and
+"mingwm10.dll" and "libgcc_s_dw2-1.dll" for MinGW runtime DLLs. If your
+versions have different names, you'll have to change files "install.nsi" and
+"libraries.list" in directory "install/win32/".
+
+3. Make variables and running the build
+---------------------------------------
+
+Makefiles of the project use some common variables that may be specified at
+build time. Following variables are supported (default value for Win32 build is
+shown after equals sign):
+
+    QMAKE = qmake
+
+        Command to run for qmake utility (Qt framework).
+
+    PERL = perl
+
+        Command to run for Perl scripts.
+
+    XSLTPROC = xsltproc
+
+        Command to run for xsltproc tool (from LibXSLT).
+
+    WGET = wget
+
+        Command to run for wget utility. Note that wget is used only for
+        KANJIDIC2 update, which is not done during normal build.
+
+    GZIP = gzip
+
+        Command to run for GZip utility.
+
+    MAKENSIS = makensis
+
+        Command to run for MakeNSIS tool (NSIS).
+
+    DOCBOOK_XSL = /docbook-xsl-ns
+
+        Path to root directory of DocBook XSL-NS stylesheets, with forward
+        slash ('/') as the only directory separator.
+
+    CXXVERSION = g++-4.6
+
+        Compiler-dependent part of Qt spec name. Use "g++-4.6" for MinGW-GCC
+        versions higher than 4.6, or "g++" for earlier versions.
+
+File "make-win32-example.cmd" contains an example of pre-setting environment
+for a Win32 build.
 
 As an alternative, you can change corresponding paths in file "platform.mk" in
 the root of the project.
 
-Installer built by the makefiles includes some MinGW and QT dll's. These dll's
-are included in the project. If you want to update them, replace the files in
-subdirectory "install/win32/lib".
+To build the project, run make utility from MinGW set (mingw-make.exe) in
+the root directory of the project.
+
+The result of Win32 build is file "fcardss-install.exe" in subdirectory
+"build/" of the project root directory.

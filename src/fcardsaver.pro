@@ -67,6 +67,7 @@ QMAKE_LINK_OBJECT_MAX = 32
 windows {
     LIBS += -lshlwapi
     RC_FILE += platform/fcardsaver.rc
+    QMAKE_LFLAGS += -static-libstdc++
     QMAKE_MAKEFILE = Makefile_win32
     OBJECTS_DIR = ../build/$${MY_TARGET}-win32
 } else:unix {

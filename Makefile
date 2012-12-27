@@ -4,7 +4,7 @@
 ifndef PLATFORM
     include platform.mk
 endif
-QTSPEC      := $(PLATFORM)-g++
+QTSPEC      := $(PLATFORM)-$(CXXVERSION)
 EXEMAKEFILE := Makefile_$(PLATFORM)
 EXETARGET   := release
 
@@ -21,8 +21,8 @@ DICTDCLEAN  := $(addsuffix -distclean,$(DICTDIRS))
 all: exec-build docs-build dict-build win32-build
 install: exec-install kde4-install gnome-install dict-install
 uninstall: exec-uninstall kde4-install gnome-install dict-uninstall
-clean: exec-clean docs-clean dict-clean
-distclean: exec-distclean docs-distclean dict-distclean
+clean: exec-clean docs-clean dict-clean win32-clean
+distclean: exec-distclean docs-distclean dict-distclean win32-distclean
 
 dict-build: $(DICTBUILD)
 dict-install: $(DICTINSTALL)
@@ -34,6 +34,7 @@ dict-distclean: $(DICTDCLEAN)
 .PHONY: dict-build dict-install dict-uninstall dict-clean dict-distclean
 .PHONY: exec-build exec-install exec-uninstall exec-clean exec-distclean
 .PHONY: docs-build docs-clean docs-distclean
+.PHONY: win32-build win32-clean win32-distclean
 .PHONY: kde4-install kde4-uninstall
 .PHONY: gnome-install gnome-uninstall
 .PHONY: $(DICTBUILD) $(DICTINSTALL) $(DICTUNINST) $(DICTCLEAN) $(DICTDCLEAN)
@@ -44,11 +45,11 @@ dict-distclean: $(DICTDCLEAN)
 exec-build: $(EXEPATH)/$(EXEFILE)
 
 src/$(EXEMAKEFILE): src/fcardsaver.pro
-	cd src && $(QMAKE) -makefile "CONFIG += $(EXETARGET)" fcardsaver.pro -r -spec $(QTSPEC)
+	cd src && $(QMAKE) -makefile "CONFIG += debug_and_release" fcardsaver.pro -r -spec $(QTSPEC)
 
 $(EXEPATH)/$(EXEFILE): src/$(EXEMAKEFILE)
 	$(MKDIR) "$(EXEPATH)"
-	$(MAKE) -C src -f $(EXEMAKEFILE) first
+	$(MAKE) -C src -f $(EXEMAKEFILE) $(EXETARGET)
 
 exec-install: src/$(EXEMAKEFILE) $(EXEPATH)/$(EXEFILE)
 	$(MAKE) -C src -f $(EXEMAKEFILE) INSTALL_ROOT=$(DESTDIR) install
@@ -92,6 +93,12 @@ gnome-uninstall:
 
 win32-build:
 	$(MAKE) -C install win32-build
+
+win32-clean:
+	$(MAKE) -C install win32-clean
+
+win32-distclean:
+	$(MAKE) -C install win32-distclean
 
 #
 # Dictionaries install/uninstall

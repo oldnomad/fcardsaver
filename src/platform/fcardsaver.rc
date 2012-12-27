@@ -9,8 +9,8 @@ END
 ID_APP ICON "fcardsaver.ico"
 
 VS_VERSION_INFO VERSIONINFO
-    FILEVERSION     1,0,0,1
-    PRODUCTVERSION  1,0,0,1
+    FILEVERSION     1,2,3,1
+    PRODUCTVERSION  1,2,3,1
     FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
 #ifdef _DEBUG
     FILEFLAGS       VS_FF_DEBUG
@@ -27,11 +27,11 @@ BEGIN
         BEGIN
             VALUE   "CompanyName", "ALKOSoft"
             VALUE   "FileDescription", "Flash Card Screensaver"
-            VALUE   "FileVersion", "1.0.0.1"
+            VALUE   "FileVersion", "1.2.3.1"
             VALUE   "LegalCopyright", "(c) Alec Kojaev, 2012"
             VALUE   "OriginalFilename", "fcardsaver.scr"
             VALUE   "ProductName", "Flash Card Screensaver"
-            VALUE   "ProductVersion", "1.0.0.1"
+            VALUE   "ProductVersion", "1.2.3.1"
         END
     END
     BLOCK "VarFileInfo"
