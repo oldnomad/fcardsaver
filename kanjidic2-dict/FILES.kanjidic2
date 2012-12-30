@@ -24,3 +24,15 @@ kanjidic2-hyougai.tsv
 kanjidic2.tsv
 
     All kanji, regardless of their class.
+
+-----------------------------------------------------------------------
+All card sets contain following fields:
+
+    - Kanji itself.
+    - English meaning.
+    - Kun'yomi readings.
+    - On'yomi readings.
+    - Nanori readings.
+    - Kanji class.
+
+Note that nanori readings are not displayed by default.

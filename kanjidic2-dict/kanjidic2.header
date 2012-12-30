@@ -4,4 +4,5 @@
 #FCARD# cell 1,1,2,white,,2
 #FCARD# cell 2,0,1,white,HanaMinA,5
 #FCARD# cell 3,2,1,white,HanaMinA,5
-#FCARD# cell 4,1,0,white,,3
+#FCARD# cell -1,-1,2,white,HanaMinA,5
+#FCARD# cell 5,1,0,white,,3

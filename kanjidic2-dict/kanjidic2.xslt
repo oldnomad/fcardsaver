@@ -43,6 +43,8 @@
         <xsl:with-param name="yomi">ja_on</xsl:with-param>
     </xsl:apply-templates>
     <xsl:value-of select="$separator"/>
+    <xsl:apply-templates select="reading_meaning" mode="nanori"/>
+    <xsl:value-of select="$separator"/>
     <xsl:apply-templates select="misc"/>
     <xsl:value-of select="$newline"/>
 </xsl:template>
@@ -101,6 +103,19 @@
             </xsl:if>
             <xsl:value-of select="local:escape-quoted(.)"/>
         </xsl:for-each>
+    </xsl:for-each>
+    <xsl:value-of select="$reading_suf"/>
+    <xsl:value-of select="$quote"/>
+</xsl:template>
+
+<xsl:template match="reading_meaning" mode="nanori">
+    <xsl:value-of select="$quote"/>
+    <xsl:value-of select="$reading_prf"/>
+    <xsl:for-each select="nanori">
+        <xsl:if test="position() != 1">
+            <xsl:value-of select="$reading_sep"/>
+        </xsl:if>
+        <xsl:value-of select="local:escape-quoted(.)"/>
     </xsl:for-each>
     <xsl:value-of select="$reading_suf"/>
     <xsl:value-of select="$quote"/>
