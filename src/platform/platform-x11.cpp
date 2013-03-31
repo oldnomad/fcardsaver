@@ -47,8 +47,7 @@ bool startup_t::parse_arg(const CmdOption::arghash_t &argval)
     }
     if (argval.contains("root"))
     {
-        QX11Info inf;
-        m_window = m_root = DefaultRootWindow(inf.display());
+        m_window = m_root = DefaultRootWindow(QX11Info::display());
         m_mode = SS_MODE_START;
         return true;
     }

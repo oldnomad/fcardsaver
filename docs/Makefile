@@ -18,8 +18,8 @@ $(BUILD_DIR)/%.gz: $(BUILD_DIR)/%
 $(MANFILES): fcardsaver-manual.docbook
 	$(XSLTPROC) -o $(BUILD_DIR)/ $(DOCBOOK_XSL)/manpages/docbook.xsl $<
 
-$(HTMLDOC): fcardsaver-manual.docbook
-	$(XSLTPROC) -o $@ $(DOCBOOK_XSL)/xhtml/docbook.xsl $<
+$(HTMLDOC): fcardsaver-manual.docbook css/docbook.css
+	$(XSLTPROC) -o $@ --stringparam html.stylesheet "css/docbook.css" $(DOCBOOK_XSL)/xhtml/docbook.xsl $<
 
 clean distclean:
 	$(DELETE_FILE) $(MANFILES) $(MANGZFILES) $(HTMLDOC)
