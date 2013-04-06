@@ -16,9 +16,9 @@ protected:
                              const QStyleOptionViewItem &option, const QModelIndex &index);
 
 signals:
-    
+
 public slots:
-    
+
 };
 
 #endif // SETUPSPLITDELEGATE_H

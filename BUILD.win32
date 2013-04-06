@@ -14,9 +14,9 @@ of FCardSaver:
 Attacker might try to replace this registry value to make the stub run another
 executable. However, to do this, attacker will need write access to the key,
 which, by default, is allowed only to System account, Administrators group,
-and Power Users group. Running with such accounts gives the attacker write
-access to many other registry keys, many of which are more dangerous attack
-vectors.
+and Power Users group. Running with privileges of such accounts gives the
+attacker write access to many other registry keys which are more dangerous
+attack vectors.
 
 
 Building FCardSaver in MS Windows
@@ -29,7 +29,7 @@ For building FCardSaver in MS Windows you'll need following prerequisites:
 
     - Qt framework version 4.7.0 or higher.
 
-    - MinGW compiler set (built-in in QT SDK or separate). MinGW binaries
+    - MinGW compiler set (built-in in Qt SDK or separate). MinGW binaries
       must be in path.
 
       Note that binary distributions of Qt framework are built using GCC 4.4.
@@ -46,13 +46,13 @@ For building FCardSaver in MS Windows you'll need following prerequisites:
       version from <ftp://ftp.zlatkovic.com/libxml>.
 
     - GZip version 1.2.4 or higher and, optionally, WGet (any version).
-      Versions included in GNUWin32, MSYS, or any other Win32 versions, should
-      work. GNUWin32 can be downloaded from <http://gnuwin32.sourceforge.net/>.
-      MSYS packages can be downloaded from <http://www.mingw.org/>.
+      Versions included in GNUWin32 and MSYS should work. GNUWin32 can be
+      downloaded from <http://gnuwin32.sourceforge.net/>. MSYS packages can be
+      downloaded from <http://www.mingw.org/>.
 
     - DocBook XSL-NS stylesheets version 1.76.1 or higher. Download links for
       DocBook XSL-NS are available at on the DocBook Project at
-      <http://sourceforge.net/projects/docbook/files/docbook-xsl-ns/>. 
+      <http://sourceforge.net/projects/docbook/files/docbook-xsl-ns/>.
 
     - NSIS version 2.46 or higher. Following NSIS extensions are required:
         * NSIS extension library "LogicLib.nsh".
@@ -73,18 +73,19 @@ Note that spaces in paths are not supported, so, for example, path to directory
 2. Versions of Qt framework and MinGW
 -------------------------------------
 
-The build was tested with Qt versions 4.7 and 4.8. Whether the build works or
-not for higher and lower versions is not known.
+The build was tested with Qt versions 4.7 and 4.8. Whether the build works for
+other 4.x versions is not known. There's a work in progress for porting
+FCardSaver to Qt5.
 
-By default, build Makefile supposes that MinGW-GCC version is higher than 4.6.
-If that's not so, you need to specify make variable CXXVERSION (see below).
+By default, build Makefile supposes that MinGW-GCC version is at least 4.6. If
+that's not so, you need to specify make variable CXXVERSION (see below).
 
 Installer built by the makefiles includes some MinGW and Qt DLLs. These DLLs
-are copied from QT framework and MinGW used for building the project. Note that
+are copied from Qt framework and MinGW used for building the project. Note that
 the installer uses file names "QCore4.dll" and "QGui4.dll" for Qt DLLs, and
 "mingwm10.dll" and "libgcc_s_dw2-1.dll" for MinGW runtime DLLs. If your
-versions have different names, you'll have to change files "install.nsi" and
-"libraries.list" in directory "install/win32/".
+versions have different names, you'll have to make changes in files "install.nsi"
+and "libraries.list" in directory "install/win32/".
 
 3. Make variables and running the build
 ---------------------------------------

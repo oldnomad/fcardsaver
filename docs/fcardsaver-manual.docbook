@@ -163,7 +163,7 @@
           the list of flash card set files to display. Note that file paths are
           specified relative to flash card set base directory, unless they reside
           outside of it, in which case absolute paths are required.</para>
-        <para>Format of flash card set files is given in 
+        <para>Format of flash card set files is given in
           <citerefentry><refentrytitle>fcardsaver-cardset</refentrytitle><manvolnum>7</manvolnum></citerefentry>.</para>
       </refsect1>
       <refsect1>
@@ -217,7 +217,7 @@
           can be specified both in configuration (configuration file for X11
           version or registry key for MS Windows version) and in a card set
           file. Syntax for specifying configuration parameters in a card set
-          file is given in 
+          file is given in
           <citerefentry><refentrytitle>fcardsaver-cardset</refentrytitle><manvolnum>7</manvolnum></citerefentry>.</para>
         <para>When a card is displayed, configuration parameters used for it are
           looked up in following order:

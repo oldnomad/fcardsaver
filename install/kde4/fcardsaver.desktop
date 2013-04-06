@@ -17,7 +17,7 @@ Name=Setup...
 Exec=fcardsaver -window %w
 Name=Display in specified window
 NoDisplay=true
- 
+
 [Desktop Action Root]
 Exec=fcardsaver -root
 Name=Display in root window
