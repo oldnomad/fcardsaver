@@ -70,6 +70,7 @@ to mingw-make in variables on the command line (see below).
 Note that spaces in paths are not supported, so, for example, path to directory
 "C:\Program Files" must be specified as "c:\progra~1".
 
+
 2. Versions of Qt framework and MinGW
 -------------------------------------
 
@@ -87,7 +88,39 @@ the installer uses file names "QCore4.dll" and "QGui4.dll" for Qt DLLs, and
 versions have different names, you'll have to make changes in files "install.nsi"
 and "libraries.list" in directory "install/win32/".
 
-3. Make variables and running the build
+
+3. External dependencies
+------------------------
+
+Windows installer offers to install two extra font sets: Kanji stroke order
+font by Timothy Eyre (http://www.nihilist.org.uk/), and Hanazono fonts (Hanazono
+Minchou A and Hanazono Minchou B) by Koichi Kamichi (http://fonts.jp/hanazono/).
+
+Kanji stroke order font covers 8240 glyphs (version 3.000) including kana, CJK
+ideographs, and other East-Asian typographic symbols, showing their stroke order
+in Japanese handwriting. The font is distributed under BSD-style license.
+
+Hanazono fonts cover 89951 glyphs (version 2013-02-22, 42863 glyphs in font A
+and 47088 glyphs in font B) including CJK URO, URO+, Extensions A to D,
+Compatibility (with Supplement), IVD, and some non-ideographic glyphs. The font
+is distributed under Hanazono Font License (M+-like permissive) or under SIL
+Open Font License.
+
+The installer doesn't include these fonts, because they ared distributed under
+different licenses. Fonts are downloaded at install time. URLs used to download
+these fonts and resulting file names are defined in configuration file
+"external.conf" in directory "install/win32/". Hanazono fonts especially need
+attention because they are regularly updated.
+
+You night also want to update KANJIDIC2 data. On Linux it can be done by
+running command "make download" in directory "kanjidic2-dict/", and, if you
+have Windows versions of both WGet and GNU Make, you can try it on Windows too.
+However, you can also just manually download KANJIDIC2 file from the site at
+<http://www.csse.monash.edu.au/~jwb/kanjidic2/kanjidic2.xml.gz> and put it
+into "kanjidic2-dict/" directory.
+
+
+4. Make variables and running the build
 ---------------------------------------
 
 Makefiles of the project use some common variables that may be specified at
