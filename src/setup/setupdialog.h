@@ -27,6 +27,8 @@ public slots:
 private slots:
     void cellRowCount(int value);
     void cellColumnCount(int value);
+    void csetRootChanged();
+    void csetRootSelect();
     void csetAddClicked();
     void csetDelClicked();
 

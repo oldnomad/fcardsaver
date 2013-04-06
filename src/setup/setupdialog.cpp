@@ -38,6 +38,11 @@ SetupDialog::SetupDialog(SaverSettings& set, QWidget *parent) :
     connect(m_ui->colsSpinner, SIGNAL(valueChanged(int)), this,
             SLOT(cellColumnCount(int)));
 
+    m_ui->csetRoot->setText(set.cardSetRoot().absolutePath());
+    connect(m_ui->csetRoot, SIGNAL(editingFinished()), this,
+            SLOT(csetRootChanged()));
+    connect(m_ui->csetRootButton, SIGNAL(clicked()), this,
+            SLOT(csetRootSelect()));
     m_ui->csetTable->setModel(m_files_model);
     m_ui->csetTable->resizeColumnsToContents();
 
@@ -73,6 +78,37 @@ void SetupDialog::cellColumnCount(int value)
         m_split_model->removeColumns(newcnt, oldcnt - newcnt);
     else
         m_split_model->insertColumns(oldcnt, newcnt - oldcnt);
+}
+
+void SetupDialog::csetRootChanged()
+{
+    QDir rootDir(m_ui->csetRoot->text());
+    if (!rootDir.makeAbsolute() ||
+            !rootDir.exists() ||
+            !rootDir.isReadable())
+    {
+        m_ui->csetRoot->setText(m_set.cardSetRoot().absolutePath());
+        return;
+    }
+    m_set.setCardSetRoot(rootDir);
+}
+
+void SetupDialog::csetRootSelect()
+{
+    QDir rootDir = m_set.cardSetRoot();
+    QString path = QFileDialog::getExistingDirectory(this, "Data root directory",
+                                                     rootDir.absolutePath(),
+                                                     QFileDialog::ShowDirsOnly|
+                                                     QFileDialog::DontResolveSymlinks);
+    if (path.isNull())
+        return;
+    rootDir.setPath(path);
+    if (!rootDir.makeAbsolute() ||
+            !rootDir.exists() ||
+            !rootDir.isReadable())
+        return;
+    m_set.setCardSetRoot(rootDir);
+    m_ui->csetRoot->setText(rootDir.absolutePath());
 }
 
 void SetupDialog::csetAddClicked()
