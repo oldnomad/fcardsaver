@@ -11,5 +11,5 @@ rem Use NSIS from default directory
 set NSISDIR=C:\Progra~1\NSIS
 rem Use MinGW from default directory
 set PATH=C:\MinGW\bin;%PATH%
-mingw32-make QMAKE=%QTDIR%\bin\qmake.exe DOCBOOK_XSL=%XSLDIR% MAKENSIS=%NSISDIR%\makensis.exe
+mingw32-make QMAKE=%QTDIR%\bin\qmake.exe DOCBOOK_XSL=%XSLDIR% MAKENSIS=%NSISDIR%\makensis.exe %*
 endlocal
