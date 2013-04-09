@@ -1,4 +1,5 @@
 build/
 web/
-make-win32.cmd
+make-*.cmd
+!make-win32-example.cmd
 src/fcardsaver.pro.user
