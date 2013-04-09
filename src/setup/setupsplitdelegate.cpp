@@ -10,9 +10,9 @@ SetupSplitDelegate::SetupSplitDelegate(QObject *parent) :
 
 QString SetupSplitDelegate::displayText(const QVariant &value, const QLocale &locale) const
 {
-    if (qVariantCanConvert<SetupSplitCell>(value))
+    if (value.canConvert<SetupSplitCell>())
     {
-        SetupSplitCell pos = qVariantValue<SetupSplitCell>(value);
+        SetupSplitCell pos = value.value<SetupSplitCell>();
         if (pos.index() < 0)
             return QString();
         return QString().sprintf("[%d]", pos.index());
@@ -25,7 +25,7 @@ bool SetupSplitDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
                                      const QModelIndex &index)
 {
     QVariant value = index.data(Qt::EditRole);
-    if (qVariantCanConvert<SetupSplitCell>(value))
+    if (value.canConvert<SetupSplitCell>())
     {
         if ((option.state & QStyle::State_Enabled) == 0 ||
                 (index.flags() & Qt::ItemIsEnabled) == 0)
@@ -33,7 +33,7 @@ bool SetupSplitDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
         if (event->type() != QEvent::MouseButtonDblClick &&
                 event->type() != QEvent::KeyPress)
             return false;
-        SetupSplitCell cell = qVariantValue<SetupSplitCell>(value);
+        SetupSplitCell cell = value.value<SetupSplitCell>();
         SetupCellDialog dlg(cell);
         if (dlg.exec() == QDialog::Accepted)
         {

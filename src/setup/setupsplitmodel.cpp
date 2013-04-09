@@ -66,7 +66,7 @@ bool SetupSplitModel::setData(const QModelIndex &index, const QVariant &value,
         emit dataChanged(index, index);
         return true;
     }
-    SetupSplitCell cell = qVariantValue<SetupSplitCell>(value);
+    SetupSplitCell cell = value.value<SetupSplitCell>();
     if (cell.index() == Card::INVALID_INDEX)
     {
         // Delete cell
