@@ -7,6 +7,7 @@
 !define BLD_STUB    "..\..\build\stub-win32"
 !define BLD_LIBS    "..\..\build\libs-win32"
 !define BLD_DICT    "..\..\build\dict"
+!define DEP_LIST    "libraries.list"
 !define REG_CONFIG  "Software\ALKOSoft\FCardSaver"
 !define REG_UNINSTALL \
     "Software\Microsoft\Windows\CurrentVersion\Uninstall\FCardScreensaver"
@@ -79,10 +80,12 @@ Section "${PRODUCT}"
 
     SetOutPath $INSTDIR
     File "${BLD_MAIN}\fcardsaver.exe"
-    File "${BLD_LIBS}\libgcc_s_dw2-1.dll"
-    File "${BLD_LIBS}\mingwm10.dll"
-    File "${BLD_LIBS}\QtCore4.dll"
-    File "${BLD_LIBS}\QtGui4.dll"
+
+    !tempfile INCFILE
+    !system 'for /f %f in (${DEP_LIST}) do echo File ^"${BLD_LIBS}\%f^" >>${INCFILE}'
+    !include "${INCFILE}"
+    !delfile "${INCFILE}"
+    !undef INCFILE
 
     SetOutPath $SYSDIR
     File "${BLD_STUB}\fcardss.scr"
@@ -248,12 +251,13 @@ FunctionEnd
 
 Section "Uninstall"
     Delete "$SYSDIR\fcardss.scr"
-
     Delete "$INSTDIR\fcardsaver.exe"
-    Delete "$INSTDIR\libgcc_s_dw2-1.dll"
-    Delete "$INSTDIR\mingwm10.dll"
-    Delete "$INSTDIR\QtCore4.dll"
-    Delete "$INSTDIR\QtGui4.dll"
+
+    !tempfile INCFILE
+    !system 'for /f %f in (${DEP_LIST}) do echo Delete ^"$INSTDIR\%f^" >>${INCFILE}'
+    !include "${INCFILE}"
+    !delfile "${INCFILE}"
+    !undef INCFILE
 
     Delete "$INSTDIR\Uninstall.exe"
     RMDir $INSTDIR

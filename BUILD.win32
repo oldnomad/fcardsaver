@@ -85,8 +85,8 @@ Installer built by the makefiles includes some MinGW and Qt DLLs. These DLLs
 are copied from Qt framework and MinGW used for building the project. Note that
 the installer uses file names "QCore4.dll" and "QGui4.dll" for Qt DLLs, and
 "mingwm10.dll" and "libgcc_s_dw2-1.dll" for MinGW runtime DLLs. If your
-versions have different names, you'll have to make changes in files "install.nsi"
-and "libraries.list" in directory "install/win32/".
+versions have different names, you'll have to make changes in file
+"libraries.list" in directory "install/win32/".
 
 
 3. External dependencies
