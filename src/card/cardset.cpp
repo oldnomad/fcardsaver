@@ -77,11 +77,36 @@ int CardSet::loadCsv(const CardDisplay& defDisplay, CsvFile& file)
      *      - "cell <fact-index>,<cell-x>,<cell-y>,<color-name>,<font-family>,<pattern>,<stylesheet>"
      *        specifies display parameters for fact text.
      *
+     *      - "protect {on|off},<keyword>,..."
+     *        protects or unprotects specified keywords from further changes below that point.
+     *
      *      - "include <filename>,<separator>"
      *        includes specified file; path may be relative to this file; separator
      *        may be specified as a literal character or a "#"-prefixed Unicode
      *        codepoint.
      */
+    enum Keyword {
+        UNKNOWN,
+        BACKGROUND,
+        PERIOD,
+        SPLIT_X,
+        SPLIT_Y,
+        CELL,
+        PROTECT,
+        INCLUDE
+    };
+    static const struct KeywordDesc {
+        Keyword     code;
+        const char *name;
+    } KEYWORD_LIST[] = {
+        { BACKGROUND, "background" },
+        { PERIOD,     "period"     },
+        { SPLIT_X,    "split-x"    },
+        { CELL,       "cell"       },
+        { INCLUDE,    "include"    },
+        { PROTECT,    "protect"    },
+        { UNKNOWN,    0            }
+    };
     QRegExp fcard("#FCARD#\\s*(\\w+)\\s+(.*)");
     fcard.setPatternSyntax(QRegExp::RegExp2);
     int cardCount = 0;
@@ -115,49 +140,87 @@ int CardSet::loadCsv(const CardDisplay& defDisplay, CsvFile& file)
                              qPrintable(aval), ret - 1);
                     continue;
                 }
-                int index = Card::INVALID_INDEX;
-                if (aname == "background")
+                Keyword code = UNKNOWN;
+                for (const KeywordDesc *kwd = KEYWORD_LIST; kwd->name != 0; kwd++)
+                    if (aname == kwd->name)
+                    {
+                        code = kwd->code;
+                        break;
+                    }
+                if (currDisplay.isProtected(code))
+                    continue;
+                switch (code)
                 {
-                    QColor bgd = QColor(aval.trimmed());
-                    if (bgd.isValid())
-                        currDisplay.setBackground(bgd);
-                }
-                else if (aname == "period")
-                {
-                    bool ok = false;
-                    int period = aval.toInt(&ok);
-                    if (ok &&
-                            period >= CardDisplay::MIN_PERIOD &&
-                            period <= CardDisplay::MAX_PERIOD)
-                        currDisplay.setPeriod(period);
-                }
-                else if (aname == "split-x")
-                {
-                    QList<int> spl;
-                    bool ok = TextConv::toIntList(alist, spl);
-                    if (ok && !spl.isEmpty())
-                        currDisplay.setSplitX(spl);
-                }
-                else if (aname == "split-y")
-                {
-                    QList<int> spl;
-                    bool ok = TextConv::toIntList(alist, spl);
-                    if (ok && !spl.isEmpty())
-                        currDisplay.setSplitY(spl);
-                }
-                else if (aname == "cell")
-                {
+                case UNKNOWN:
+                    break;
+                case BACKGROUND:
+                    {
+                        QColor bgd = QColor(aval.trimmed());
+                        if (bgd.isValid())
+                            currDisplay.setBackground(bgd);
+                    }
+                    break;
+                case PERIOD:
+                    {
+                        bool ok = false;
+                        int period = aval.toInt(&ok);
+                        if (ok &&
+                                period >= CardDisplay::MIN_PERIOD &&
+                                period <= CardDisplay::MAX_PERIOD)
+                            currDisplay.setPeriod(period);
+                    }
+                    break;
+                case SPLIT_X:
+                case SPLIT_Y:
+                    {
+                        QList<int> spl;
+                        bool ok = TextConv::toIntList(alist, spl);
+                        if (ok && !spl.isEmpty())
+                        {
+                            if (code == SPLIT_X)
+                                currDisplay.setSplitX(spl);
+                            else
+                                currDisplay.setSplitY(spl);
+                        }
+                    }
+                    break;
+                case CELL:
                     if (!alist.isEmpty())
                     {
                         QString indVal = alist.takeFirst();
                         bool ok = false;
                         int ind = indVal.toInt(&ok);
                         if (ok && ind >= 0)
-                            index = ind;
+                        {
+                            CardCell cell;
+                            cell.assign(alist);
+                            currDisplay.setValue(ind, cell);
+                        }
                     }
-                }
-                else if (aname == "include")
-                {
+                    break;
+                case PROTECT:
+                    if (!alist.isEmpty())
+                    {
+                        QString bVal = alist.takeFirst();
+                        bool value;
+                        if (bVal == "on")
+                            value = true;
+                        else if (bVal == "off")
+                            value = false;
+                        else
+                            break;
+                        foreach (QString name, alist)
+                        {
+                            for (const KeywordDesc *kwd = KEYWORD_LIST; kwd->name != 0; kwd++)
+                                if (name == kwd->name && kwd->code != PROTECT)
+                                {
+                                    currDisplay.setProtected(kwd->code, value);
+                                    break;
+                                }
+                        }
+                    }
+                    break;
+                case INCLUDE:
                     if (!alist.isEmpty())
                     {
                         QChar sep = CsvFile::DEFAULT_SEPARATOR;
@@ -169,12 +232,7 @@ int CardSet::loadCsv(const CardDisplay& defDisplay, CsvFile& file)
                             return inclCnt;
                         cardCount += inclCnt;
                     }
-                }
-                if (index != Card::INVALID_INDEX)
-                {
-                    CardCell cell;
-                    cell.assign(alist);
-                    currDisplay.setValue(index, cell);
+                    break;
                 }
             }
             continue;

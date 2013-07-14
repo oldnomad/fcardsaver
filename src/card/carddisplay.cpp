@@ -8,6 +8,7 @@ CardDisplay::CardDisplay()
 
 CardDisplay::CardDisplay(const CardDisplay &other) : base_t(other)
 {
+    m_protect = other.m_protect;
     m_background = other.m_background;
     m_period = other.m_period;
     m_split_x = other.m_split_x;
@@ -17,6 +18,7 @@ CardDisplay::CardDisplay(const CardDisplay &other) : base_t(other)
 CardDisplay& CardDisplay::operator =(const CardDisplay& other)
 {
     base_t::operator =(other);
+    m_protect = other.m_protect;
     m_background = other.m_background;
     m_period = other.m_period;
     m_split_x = other.m_split_x;
@@ -27,6 +29,7 @@ CardDisplay& CardDisplay::operator =(const CardDisplay& other)
 bool CardDisplay::operator ==(const CardDisplay& other) const
 {
     return base_t::operator ==(other) &&
+            m_protect == other.m_protect &&
             m_background == other.m_background &&
             m_period == other.m_period &&
             m_split_x == other.m_split_x &&
@@ -35,6 +38,7 @@ bool CardDisplay::operator ==(const CardDisplay& other) const
 
 CardDisplay& CardDisplay::operator +=(const CardDisplay& other)
 {
+    m_protect |= other.m_protect;
     if (other.m_background.isValid() && other.m_background.alpha() != 0)
         m_background = other.m_background;
     if (other.m_period >= MIN_PERIOD && other.m_period <= MAX_PERIOD)
@@ -63,6 +67,7 @@ CardDisplay& CardDisplay::operator +=(const CardDisplay* other)
 
 void CardDisplay::debugPrint() const
 {
+    qDebug("PRT: %08X", m_protect);
     qDebug("BGD: %s", qPrintable(m_background.name()));
     qDebug("PER: %d", m_period);
     for (int i = 0; i < m_split_x.size(); i++)
@@ -75,11 +80,20 @@ void CardDisplay::debugPrint() const
 
 void CardDisplay::clear()
 {
+    m_protect = 0;
     m_background = QColor();
     m_period = 0;
     m_split_x.clear();
     m_split_y.clear();
     base_t::clear();
+}
+
+void CardDisplay::setProtected(int code, bool value)
+{
+    if (value)
+        m_protect |= 01 << code;
+    else
+        m_protect &= ~(01 << code);
 }
 
 void CardDisplay::setMaxIndex(int index)

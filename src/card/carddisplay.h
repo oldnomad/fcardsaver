@@ -28,6 +28,8 @@ public:
     void setValues(const CardDisplay& other);
     void removeValue(int index);
 
+    bool isProtected(int code) { return (m_protect & (01 << code)) != 0; }
+    void setProtected(int code, bool value);
     QColor background() const { return m_background; }
     void setBackground(const QColor& color) { m_background = color; }
     int period() const { return m_period; }
@@ -52,6 +54,7 @@ public:
 private:
     typedef QMap<int, CardCell> base_t;
 
+    unsigned    m_protect;      // Protection flags
     QColor      m_background;   // Background color
     int         m_period;       // Display period, milliseconds
     QList<int>  m_split_x;      // Split proportions (horizontal, pixel/percent)

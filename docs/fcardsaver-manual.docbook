@@ -2,572 +2,684 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
     "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <book xmlns="http://docbook.org/ns/docbook">
-  <title>FCardSaver Manual</title>
+    <title>FCardSaver Manual</title>
 
-  <preface>
-    <title>About FCardSaver</title>
-    <para><application>FCardSaver</application> is a general-purpose
-      flashcard-showing screensaver. It is designed in Qt framework and works
-      both under X11 and under Microsoft Windows (XP or higher).</para>
+    <preface>
+        <title>About FCardSaver</title>
 
-    <blockquote>
-      <title>Historical note</title>
-      <attribution><author><firstname>Alec</firstname><surname>Kojaev</surname>
-        <email></email>alec@kojaev.name</author></attribution>
-      <para>Long-long ago there existed two screensavers for people studying
-        Japanese language:
-        <ulink url="http://kde-apps.org/content/show.php/kanjisaver?content=31660">kanjisaver</ulink>
-        that displayed kanji from the JLPT set, and
-        <ulink url="http://kde-look.org/content/show.php/kannasaver?content=16792">kannasaver</ulink>
-        that displayed kana, both by Ryan Schultz. Unfortunately, both projects
-        were eventually orphaned (kanjisaver
-        <ulink url="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=510529">here</ulink>
-        and kannasaver
-        <ulink url="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=510534">here</ulink>),
-        and, as a result, dropped from Debian and from most Debian-based
-        distributions, including Ubuntu which I use. Kannasaver was temporarily
-        <ulink url="https://looksblo.wordpress.com/2011/02/10/kannasaver-1-2-for-kde-4-released/">resurrected</ulink>
-        in February 2011 by another maintainer, but after two releases dropped
-        from the radar again.</para>
-      <para>For some time I lived with an old version of kannasaver, patching it
-        to the best of my ability, but it wasn't a good experience for sure.
-        Pretty soon I was thinking about writing a screensaver of my own, unifying
-        functionality of both old screensavers. After one or two false starts I
-        finally settled on the functionality that I want from the screensaver,
-        and, in the autumn of 2012, the screensaver ran for the first time. I
-        chose Qt as a framework because I wanted the screensaver to work both
-        under KDE and under Microsoft Windows, which I still have to use at
-        work.</para>
-      <para>Pretty soon the project started to grow and become more and more
-        generic. Not satisfied by simply displaying a kanji or a kana character
-        in the centre of the screen, it now could display arbitrary data in a
-        rectangular grid. Kanji and kana sets, instead of being hard-coded as in
-        the old screensavers, migrated to external files in format pretty close
-        to that used by <ulink url="http://ankisrs.net/">Anki</ulink>. For kanji
-        set generation I used a comprehensive and well-maintained
-        <ulink url="http://www.csse.monash.edu.au/%7Ejwb/kanjidic2/">KANJIDIC2</ulink>
-        dictionary.</para>
-    </blockquote>
-  </preface>
+        <para><application>FCardSaver</application> is a general-purpose
+        flashcard-showing screensaver. It is designed in Qt framework and works
+        both under X11 and under Microsoft Windows (XP or higher).</para>
 
-  <chapter>
-    <title>General concepts</title>
-    <variablelist>
-      <title>Card sets, cards, facts</title>
-      <varlistentry><term>Fact</term><listitem>Fact is a piece of information.
-        In the simplest case a fact is just a text, but it may include also
-        some non-textual information, for example, pictures.
-        <application>FCardSaver</application> supports only textual facts
-        expressed in a subset of HTML.</listitem></varlistentry>
-      <varlistentry><term>Flash card</term><listitem>Flash card, or simply
-        card, is a tuple (an ordered list) of facts. Typically a card has
-        some structure: for example, a card on a foreign word would include
-        its spelling, pronunciation, translation, perhaps some other
-        information; however, facts in a card can be referred to only by
-        index.</listitem></varlistentry>
-      <varlistentry><term>Flash card set</term><listitem>Flash card set,
-        or card set, is a set of flash cards with similar structure. For
-        example, in a card set on foreign words the first fact in all cards
-        may contain the spelling, the second may contains the pronunciation,
-        and so on.</listitem></varlistentry>
-    </variablelist>
-    <variablelist>
-      <title>Display concepts</title>
-      <varlistentry><term>Display area</term><listitem>Display area is a
-        rectangular portion of the computer monitor used to display information.
-        Depending on the mode, display area may be a part of the screen (a
-        window client area) or a whole screen.</listitem></varlistentry>
-      <varlistentry><term>X/Y-split</term><term>Grid</term><listitem>Split is a
-        division of the display area into subareas across one axis. There exist
-        X-split (into columns across horizontal axis) and Y-split (into rows
-        across vertical axis). Both X-split and Y-split together define a
-        rectangular grid.</listitem></varlistentry>
-      <varlistentry><term>Cell</term><listitem>Cell is one of rectangular
-        portions of the display area separated by imaginary grid lines. Each
-        cell may be used to display one fact.</listitem></varlistentry>
-    </variablelist>
-  </chapter>
+        <blockquote>
+            <title>Historical note</title>
+            <attribution><author><firstname>Alec</firstname>
+            <surname>Kojaev</surname><email></email>alec@kojaev.name</author>
+            </attribution>
 
-  <appendix>
-    <title>Links</title>
-    <itemizedlist>
-      <listitem><simpara><ulink
-        url="http://ankisrs.net/">Anki</ulink></simpara></listitem>
-      <listitem><simpara><ulink
-        url="http://www.csse.monash.edu.au/%7Ejwb/kanjidic2/"
-        >KANJIDIC2</ulink></simpara></listitem>
-      <listitem><simpara><ulink
-        url="http://kde-apps.org/content/show.php/kanjisaver?content=31660"
-        >kanjisaver</ulink></simpara></listitem>
-      <listitem><simpara><ulink
-        url="http://kde-look.org/content/show.php/kannasaver?content=16792"
-        >kannasaver</ulink></simpara></listitem>
-    </itemizedlist>
-  </appendix>
+            <para>Long-long ago there existed two screensavers for people
+                studying Japanese language:
+                <ulink url="http://kde-apps.org/content/show.php/kanjisaver?content=31660">kanjisaver</ulink>
+                that displayed kanji from the JLPT set, and
+                <ulink url="http://kde-look.org/content/show.php/kannasaver?content=16792">kannasaver</ulink>
+                that displayed kana, both by Ryan Schultz. Unfortunately, both
+                projects were eventually orphaned (kanjisaver
+                <ulink url="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=510529">here</ulink>
+                and kannasaver
+                <ulink url="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=510534">here</ulink>),
+                and, as a result, dropped from Debian and from most
+                Debian-based distributions, including Ubuntu which I use.
+                Kannasaver was temporarily
+                <ulink url="https://looksblo.wordpress.com/2011/02/10/kannasaver-1-2-for-kde-4-released/">resurrected</ulink>
+                in February 2011 by another maintainer, but after two releases
+                dropped from the radar again.</para>
 
-  <appendix>
-    <title>Manual pages</title>
-    <refentry>
-      <refmeta>
-        <refentrytitle>fcardsaver</refentrytitle>
-        <manvolnum>6x</manvolnum>
-        <refmiscinfo class="source">fcardsaver</refmiscinfo>
-        <refmiscinfo class="manual">FCardSaver Manual</refmiscinfo>
-      </refmeta>
-      <refnamediv>
-        <refname>fcardsaver</refname>
-        <refpurpose>screensaver for displaying flash cards</refpurpose>
-      </refnamediv>
-      <refsynopsisdiv>
-        <cmdsynopsis>
-          <command>fcardsaver</command>
-          <group choice="opt">
-            <arg choice="plain">-root</arg>
-            <arg choice="plain">-window <replaceable>window-id</replaceable></arg>
-            <arg choice="plain">-setup</arg>
-            <arg choice="plain">-demo</arg>
-            <arg choice="plain">-help</arg>
-          </group>
-          <arg choice="opt"><replaceable class="option">Qt-options</replaceable></arg>
-          <arg choice="opt">-caption <replaceable>title</replaceable></arg>
-          <arg choice="opt">-icon <replaceable>icon</replaceable></arg>
-          <arg choice="opt"><replaceable>qtoptions</replaceable></arg>
-        </cmdsynopsis>
-      </refsynopsisdiv>
-      <refsect1>
-        <title>Description</title>
-        <para><application>FCardSaver</application> is cross-platform screensaver
-          that displays "flash cards", tuples of connected facts, in a table.
-          It is written using Qt and should, theoretically, be able to run on
-          any platform supported by Qt; however, only X11 and MS Windows versions
-          are implemented.</para>
-        <para>Note that command line format specified in this manual is for X11
-          version only. Command line format for MS Windows version is mandated
-          by Microsoft specification in
-          <ulink url="http://support.microsoft.com/kb/182383"><citetitle>MS KB182383</citetitle></ulink>.</para>
-        <para>Initial goal of development was to devise a replacement for
-          <application>kannasaver</application> (dropped from Ubuntu Maverick as
-          unmaintained since 2007). In time, application extended to cover also
-          functionality contained in <application>kanjisaver</application>
-          (dropped from Ubuntu Natty), as well as more generic functionality.</para>
-        <para>Each flash card displayed by <application>FCardSaver</application> is
-          a tuple of facts (textual fragments). Screen is divided into a
-          rectangular grid and each fact is either displayed in one of cells,
-          or omitted.</para>
-        <para>Flash cards are organized in sets, and each set may specify its own
-          configuration parameters including step of the grid, background colour,
-          default text colour for each cell, which fact is displayed in which cell,
-          and so on.</para>
-        <para>Setup dialog for <application>FCardSaver</application> allows setting of
-          default values for all configuration parameters. It also allows editing
-          the list of flash card set files to display. Note that file paths are
-          specified relative to flash card set base directory, unless they reside
-          outside of it, in which case absolute paths are required.</para>
-        <para>Format of flash card set files is given in
-          <citerefentry><refentrytitle>fcardsaver-cardset</refentrytitle><manvolnum>7</manvolnum></citerefentry>.</para>
-      </refsect1>
-      <refsect1>
-        <title>Options</title>
+            <para>For some time I lived with an old version of kannasaver,
+                patching it to the best of my ability, but it wasn't a good
+                experience for sure. Soon I was thinking about writing a
+                screensaver of my own, unifying functionality of both old
+                screensavers. After one or two false starts I finally settled
+                on the functionality that I want from the screensaver, and,
+                in the autumn of 2012, the screensaver ran for the first time.
+                I chose Qt as a framework because I wanted the screensaver to
+                work both under KDE and under Microsoft Windows, which I still
+                have to use at work.</para>
+
+            <para>Pretty soon the project started to grow and become more and
+                more generic. Not satisfied by simply displaying a kanji or a
+                kana character in the centre of the screen, it now could
+                display arbitrary data in a rectangular grid. Kanji and kana
+                sets, instead of being hard-coded as in the old screensavers,
+                migrated to external files in format pretty close to that used
+                by <ulink url="http://ankisrs.net/">Anki</ulink>. For kanji set
+                generation I used a comprehensive and well-maintained
+                <ulink url="http://www.csse.monash.edu.au/%7Ejwb/kanjidic2/">KANJIDIC2</ulink>
+                dictionary.</para>
+        </blockquote>
+    </preface>
+
+    <chapter>
+        <title>General concepts</title>
         <variablelist>
-          <varlistentry>
-            <term><option>-root</option></term>
-            <listitem>
-              <simpara>Displays the screensaver in the root window.</simpara>
-            </listitem>
-          </varlistentry>
-          <varlistentry>
-            <term><option>-window <replaceable>window-id</replaceable></option></term>
-            <listitem>
-              <simpara>Displays the screensaver in specified window.</simpara>
-            </listitem>
-          </varlistentry>
-          <varlistentry>
-            <term><option>-demo</option></term>
-            <listitem>
-              <simpara>Displays the screensaver in a new window. This is the default mode.</simpara>
-            </listitem>
-          </varlistentry>
-          <varlistentry>
-            <term><option>-setup</option></term>
-            <listitem>
-              <simpara>Displays screensaver configuration dialog.</simpara>
-            </listitem>
-          </varlistentry>
-          <varlistentry>
-            <term><option>-help</option></term>
-            <listitem>
-              <simpara>Prints short command synopsis and exits.</simpara>
-            </listitem>
-          </varlistentry>
-        </variablelist>
-        <para>KDE-mandated options <option>-caption</option> and <option>-icon</option>
-          are ignored. Note that <application>FCardSaver</application> doesn't
-          link KDE libraries and, therefore, doesn't support complete set of
-          KDE options.</para>
-        <para>Besides that, <application>FCardSaver</application> also supports
-          all standard Qt options, as documented in
-          <citerefentry><refentrytitle>qtoptions</refentrytitle><manvolnum>7</manvolnum></citerefentry>.</para>
-      </refsect1>
-      <refsect1>
-        <title>Configuration parameters</title>
-        <para>This section lists configuration parameters supported by current
-          version of <application>FCardSaver</application>.</para>
-        <para>Most <application>FCardSaver</application> configuration parameters
-          (with the exception of the card set file list and the trace color)
-          can be specified both in configuration (configuration file for X11
-          version or registry key for MS Windows version) and in a card set
-          file. Syntax for specifying configuration parameters in a card set
-          file is given in
-          <citerefentry><refentrytitle>fcardsaver-cardset</refentrytitle><manvolnum>7</manvolnum></citerefentry>.</para>
-        <para>When a card is displayed, configuration parameters used for it are
-          looked up in following order:
-          <orderedlist>
-            <listitem>
-              <simpara>Parameters specified in the same card set file prior
-                       to the card (the latest specification gets precedence).
-              </simpara>
-            </listitem>
-            <listitem>
-              <simpara>If this card set file is included into another file,
-                parameters specified in the including file prior to the
-                inclusion point (the latest specification gets precedence).
-              </simpara>
-            </listitem>
-            <listitem>
-              <simpara>Parameters specified in the configuration (configuration
-                file or registry key).
-              </simpara>
-            </listitem>
-          </orderedlist></para>
-        <refsect2>
-          <title>Syntaxes</title>
-          <para>Values specified in the configuration parameters both in configuration
-            file or registry, and in a card set file, belong to one of several types.
-            In many cases format used by these types is dictated by the medium
-            (for example, integer values in the regsitry use registry type REG_DWORD);
-            nevertheless there are some situations where <application>FCardSaver</application>
-            uses its own data formats on top of plain text strings. This section
-            describes such syntaxes.</para>
-          <variablelist>
-            <varlistentry>
-              <term>Text strings</term>
-              <listitem>
-                <simpara>Text strings in parameter values specified in a card set file
-                  use double-quote character ('"') for quoting and backslash
-                  character ('\') for escaping double-quote character inside
-                  the string. Any string containing whitespace, comma, or
-                  double-quote character, must be quoted.
-                </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term>Floating-point values</term>
-              <listitem>
-                <simpara>Floating-point numbers in parameter values specified in a card
-                  set file use dot character ('.') as fractional part separator.
-                </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term>Color values</term>
-              <listitem>
-                <simpara>Color values are specified as a text containing color name or
-                  color definition.</simpara>
-                <simpara>Color definition is given as <literal>"#<replaceable>RGB</replaceable>"</literal>,
-                  where each of <replaceable>R</replaceable>, <replaceable>G</replaceable>
-                  and <replaceable>B</replaceable> is a hexadecimal number
-                  specifying corresponding color component (red, green, or
-                  blue). Numbers may contain from 1 to 4 hexadecimal digits,
-                  but all components must use the same number of digits.
-                </simpara>
-                <simpara>Color name can be any of SVG color keyword names. In some
-                  cases additional values <literal>"transparent"</literal>
-                  and empty string are accepted to specify absence of color.
-                </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term>Single-character values</term>
-              <listitem>
-                <simpara>Single-character values (for example, card set file delimiter
-                  character) are specified as a text containing single character
-                  or character definition.
-                </simpara>
-                <simpara>Character definition is given as <literal>"#<replaceable>CCCC</replaceable>"</literal>,
-                  where <replaceable>CCCC</replaceable> is hexadecimal Unicode
-                  code point number. For example, <literal>"#0009"</literal>
-                  specifies Unicode character "U+0009 CHARACTER TABULATION".
-                </simpara>
-              </listitem>
-            </varlistentry>
-          </variablelist>
-        </refsect2>
-        <refsect2>
-          <title>General section</title>
-          <para>Parameters listed in this section are placed in section
-            <property>[general]</property> of the configuration file (X11), or
-            under registry subkey <property>"general\"</property> (MS Windows).
-            Unless explicitly marked otherwise, they can be also specified in
-            the card set file.</para>
-          <variablelist termlength="5" spacing="normal">
-            <varlistentry>
-              <term><command>background</command> <replaceable>color</replaceable></term>
-              <listitem>
-                <simpara>Card background color. Default value is <literal>black</literal>.
-                </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><command>split-{x|y}</command> <replaceable>size</replaceable>,...</term>
-              <listitem>
-                <simpara>Relative size of columns or rows of the card. Size can
-                  be specified in arbitrary units, so, say, <userinput>3,4,3</userinput>
-                  and <userinput>15,20,15</userinput> specify the same
-                  split. Default value for both splits is <literal>20,60,20</literal>.
-                </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><command>trace</command> <replaceable>color</replaceable> (config only)</term>
-              <listitem>
-                <simpara>Cell trace color. Cell trace can used to debug card split.
-                  Default value is empty string (no trace).
-                </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><command>period</command> <replaceable>msec</replaceable></term>
-              <listitem>
-                <simpara>Card display time, in milliseconds. Default value is
-                  <literal>3000</literal> (3 sec).
-                </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><command>data-root</command> <replaceable>path</replaceable> (config only)</term>
-              <listitem>
-                <simpara>Path to directory used as a root for flash card set
-                  files. Default value depends on the platform.
-                </simpara>
-              </listitem>
-            </varlistentry>
-          </variablelist>
-        </refsect2>
-        <refsect2>
-          <title>Display parameters section</title>
-          <para>Parameters listed in this section are placed under an array in
-            section <property>[display]</property> of the configuration file
-            (X11), or in registry subkey <property>"display\"</property> (MS
-            Windows). Array is indexed by fact index, 1-based. If a card
-            contains more facts than there are display parameter sets specified,
-            the remaining facts will not be displayed.</para>
-          <variablelist>
-            <varlistentry>
-              <term><command>cell</command> <replaceable>cell-x</replaceable>,<replaceable>cell-y</replaceable></term>
-              <listitem>
-                <simpara>Column and row of the cell where the fact will be
-                  displayed. Value <literal>-1</literal> for any coordinate
-                  marks the fact as not displayed.
-                </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><command>color</command> <replaceable>color</replaceable></term>
-              <listitem>
-                <simpara>Specifies default text color for the displayed fact.
-                  Default value is <literal>white</literal>.
-                </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><command>font</command> <replaceable>font-family</replaceable></term>
-              <listitem>
-                <simpara>Specifies default text font family for the displayed fact.
-                  Default value is <literal>Helvetica</literal>.
-                </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><command>lines</command> <replaceable>num-lines</replaceable></term>
-              <listitem>
-                <simpara>Specifies approximate number of lines for the displayed fact.
-                  May be non-integer. If this parameter is specified and positive,
-                  its value is used to calculate initial default font size. Font
-                  size may be further decremented if the text of the fact doesn't
-                  fit in the cell. Default value is <literal>0</literal>.
-                </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><command>pattern</command> <replaceable>pattern-text</replaceable></term>
-              <listitem>
-                <simpara>Specifies fact text preprocessing pattern. Pattern is a
-                  non-empty text string containing sequence <literal>"%1"</literal>.
-                  If pattern is specified, each occurence of this sequence is
-                  replaced by the fact text, and the result is used instead of
-                  the original text. Default value is empty string (no pattern).
-                </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><command>stylesheet</command> <replaceable>stylesheet-text</replaceable></term>
-              <listitem>
-                <simpara>Specifies CSS stylesheet for the displayed fact. Only
-                  a subset of CSS supported by Qt library may be specified.
-                  Default value is empty string (use default stylesheet).
-                </simpara>
-              </listitem>
-            </varlistentry>
-          </variablelist>
-          <para>Display parameter sets may be also specified in the flash card
-            set file using following syntax:</para>
-          <para><cmdsynopsis><command>cell</command> <arg choice="plain"><replaceable
-            >cell-x</replaceable>,<replaceable>cell-y</replaceable><arg
-            choice="opt">,<replaceable>color</replaceable><arg
-            choice="opt">,<replaceable>font-family</replaceable><arg
-            choice="opt">,<replaceable>num-lines</replaceable><arg
-            choice="opt">,<replaceable>pattern-text</replaceable><arg
-            choice="opt">,<replaceable>stylesheet-text</replaceable></arg></arg></arg></arg></arg></arg></cmdsynopsis></para>
-        </refsect2>
-        <refsect2>
-          <title>Card sets section</title>
-          <para>Parameters listed in this section are placed under an array in
-            section <property>[cardsets]</property> of the configuration file
-            (X11), or in registry subkey <property>"cardsets\"</property> (MS
-            Windows).</para>
-          <para>Each array element contains two parameters, <command>path</command>
-            and <command>separator</command>, specifying path to a flash card
-            set file and delimiter character used by this file.</para>
-          <para>Both absolute and relative paths may be specified. Relative
-            paths are resolved relative to data root path (see configuration
-            parameter <command>data-root</command>).</para>
-        </refsect2>
-        <refsect2>
-          <title>Card set file inclusion</title>
-          <para>Flash card set file may include another flash card set file.
-            Such inclusion uses following parameter syntax:</para>
-          <para><cmdsynopsis><command>include</command> <arg
-            choice="plain"><replaceable>file-path</replaceable>,<replaceable
-            >delim-char</replaceable></arg></cmdsynopsis></para>
-          <para>Path to the included file may be specified relative to the
-            including file, or as an absolute path.</para>
-          <para>Note that file inclusion is inheriting; that means that
-            configuration parameters specified in the including file continue
-            to work on the included file, unless explicitly overridden.</para>
-        </refsect2>
-      </refsect1>
-      <refsect1>
-        <title>Files</title>
-        <variablelist>
-          <varlistentry>
-            <term><filename class="directory">~/.config/ALKOSoft/FCardSaver.conf</filename> (X11)</term>
-            <term><property>HKCU\Software\ALKOSoft\FCardSaver\</property> (MS Windows)</term>
-            <listitem><simpara>Location of <application>FCardSaver</application> configuration.</simpara></listitem>
-          </varlistentry>
-          <varlistentry>
-            <term><filename class="directory">/usr/share/fcardsaver/</filename> (X11)</term>
-            <term><filename class="directory"><envar>%CommonAppData%</envar>\ALKOSoft\FCardSaver\</filename> (MS Windows)</term>
-            <listitem><simpara>Default data root directory.</simpara></listitem>
-          </varlistentry>
-        </variablelist>
-      </refsect1>
-      <refsect1>
-        <title>Author</title>
-        <para>Alec Kojaev <email>alec@kojaev.name</email></para>
-      </refsect1>
-      <refsect1>
-        <title>See also</title>
-        <para><simplelist type="inline">
-          <member><citerefentry><refentrytitle>X</refentrytitle><manvolnum>1</manvolnum></citerefentry></member>
-          <member><citerefentry><refentrytitle>fcardsaver-cardset</refentrytitle><manvolnum>7</manvolnum></citerefentry></member>
-        </simplelist></para>
-      </refsect1>
-    </refentry>
+            <title>Card sets, cards, facts</title>
 
-    <refentry>
-      <refmeta>
-        <refentrytitle>fcardsaver-cardset</refentrytitle>
-        <manvolnum>7</manvolnum>
-        <refmiscinfo class="source">fcardsaver</refmiscinfo>
-        <refmiscinfo class="manual">FCardSaver Manual</refmiscinfo>
-      </refmeta>
-      <refnamediv>
-        <refname>fcardsaver-cardset</refname>
-        <refpurpose>FCardSaver card set file structure</refpurpose>
-      </refnamediv>
-      <refsect1>
-        <title>Overview</title>
-        <para><application>FCardSaver</application> card set file format is based
-          on format of plain text files supported by <application>Anki</application>
-          import function. In fact, any <application>FCardSaver</application>
-          card set file will be accepted as valid by <application>Anki</application>.</para>
-        <para>A card set file is a plain text file in UTF-8 encoding. Any line
-          starting with hash sign ("#") is a comment; all comments except
-          those starting with "#FCARD#" are ignored (see below). Each
-          non-comment line except, optionally, the first non-comment line,
-          contain delimiter-separated values with quoting and escaping rules
-          defined by <citation>RFC 4180</citation> (CSV).</para>
-        <para>Card set files shipped with <application>FCardSaver</application>
-          usually are tab-separated, but any single-character separator is
-          supported. Unlike <application>Anki</application>, <application>FCardSaver</application>
-          doesn't try to guess the separator, but expects the user to specify
-          the separator for each file in the configuration dialog.</para>
-      </refsect1>
-      <refsect1>
-        <title>Cards</title>
-        <para>Each line of delimiter-separated values defines a "card", a tuple
-          of text fields. Each text block is interpreted as a HTML fragment,
-          using a subset of HTML supported by Qt library.</para>
-        <para>Delimiter-separated values use quoting and escaping rules from the
-          CSV standard. Each field that contains double-quote character,
-          separator character, or explicit line break, must be enclosed in
-          double-quotes, with all internal double-quote characters escaped as
-          double double-quote ('""').</para>
-        <para>All explicit line breaks within quoted fields are replaced by HTML
-          tag <literal>&lt;br&gt;</literal>.</para>
-      </refsect1>
-      <refsect1>
-        <title>Optional tags line</title>
-        <para>If the first non-comment line in the card set file starts with
-          prefix <literal>tags:</literal>, it is not split according to the
-          general rules. Instead, the remaining part of string after the
-          prefix is split by whitespace, and the resulting list of words is
-          interpreted as "tags" to be added to the end of each card. That is,
-          file
-          <informalexample><programlisting>
-            tags: family relationship
-            pater,father
-            mater,mother
-            filius,son
-          </programlisting></informalexample>
-          is equivalent to file
-          <informalexample><programlisting>
-            pater,father,family,relationship
-            mater,mother,family,relationship
-            filius,son,family,relationship
-          </programlisting></informalexample>
-        </para>
-      </refsect1>
-      <refsect1>
-        <title>FCardSaver-specific comments</title>
-        <para>Comment lines that start with <literal>#FCARD#</literal> are
-          interpreted by <application>FCardSaver</application>. Remaining
-          part of the line is separated by whitespace into two fields:
-          parameter name and parameter value. Parameter value is further
-          split into parts by commas.</para>
-        <para>Complete list of supported parameters and their values is given
-          in <citerefentry><refentrytitle>fcardsaver</refentrytitle><manvolnum>6x</manvolnum></citerefentry>.</para>
-      </refsect1>
-      <refsect1>
-        <title>Author</title>
-        <para>Alec Kojaev <email>alec@kojaev.name</email></para>
-      </refsect1>
-      <refsect1>
-        <title>See also</title>
-        <para><simplelist type="inline">
-          <member><citerefentry><refentrytitle>fcardsaver</refentrytitle><manvolnum>6x</manvolnum></citerefentry></member>
-        </simplelist></para>
-      </refsect1>
-    </refentry>
-  </appendix>
+            <varlistentry><term>Fact</term>
+            <listitem>Fact is a piece of information. In the simplest case a
+                fact is just a text, but it may include also some non-textual
+                information, for example, pictures.
+                <application>FCardSaver</application> supports only textual
+                facts expressed in a subset of HTML.</listitem></varlistentry>
+
+            <varlistentry><term>Flash card</term>
+            <listitem>Flash card, or simply card, is a tuple (an ordered list)
+                of facts. Typically a card has some structure: for example, a
+                card on a foreign word would include its spelling,
+                pronunciation, translation, perhaps some other information;
+                however, facts in a card can be referred to only by
+                index.</listitem></varlistentry>
+
+            <varlistentry><term>Flash card set</term>
+            <listitem>Flash card set, or card set, is a set of flash cards with
+                similar structure. For example, in a card set on foreign words
+                the first fact in all cards may contain the spelling, the
+                second may contains the pronunciation, and so
+                on.</listitem></varlistentry>
+        </variablelist>
+
+        <variablelist>
+            <title>Display concepts</title>
+
+            <varlistentry><term>Display area</term>
+            <listitem>Display area is a rectangular portion of the computer
+                monitor used to display information. Depending on the mode,
+                display area may be a part of the screen (a window client area)
+                or a whole screen.</listitem></varlistentry>
+
+            <varlistentry><term>X/Y-split</term><term>Grid</term>
+            <listitem>Split is a division of the display area into subareas
+                across one axis. There exist X-split (into columns across
+                horizontal axis) and Y-split (into rows across vertical axis).
+                Both X-split and Y-split together define a rectangular
+                grid.</listitem></varlistentry>
+
+            <varlistentry><term>Cell</term>
+            <listitem>Cell is one of rectangular portions of the display area
+                separated by imaginary grid lines. Each cell may be used to
+                display one fact.</listitem></varlistentry>
+        </variablelist>
+    </chapter>
+
+    <appendix>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem><simpara><ulink url="http://ankisrs.net/"
+                >Anki</ulink></simpara></listitem>
+            <listitem><simpara><ulink url="http://www.csse.monash.edu.au/%7Ejwb/kanjidic2/"
+                >KANJIDIC2</ulink></simpara></listitem>
+            <listitem><simpara><ulink url="http://kde-apps.org/content/show.php/kanjisaver?content=31660"
+                >kanjisaver</ulink></simpara></listitem>
+            <listitem><simpara><ulink url="http://kde-look.org/content/show.php/kannasaver?content=16792"
+                >kannasaver</ulink></simpara></listitem>
+        </itemizedlist>
+    </appendix>
+
+    <appendix>
+        <title>Manual pages</title>
+
+        <refentry>
+            <refmeta>
+                <refentrytitle>fcardsaver</refentrytitle>
+                <manvolnum>6x</manvolnum>
+                <refmiscinfo class="source">fcardsaver</refmiscinfo>
+                <refmiscinfo class="manual">FCardSaver Manual</refmiscinfo>
+            </refmeta>
+
+            <refnamediv>
+                <refname>fcardsaver</refname>
+                <refpurpose>screensaver for displaying flash cards</refpurpose>
+            </refnamediv>
+
+            <refsynopsisdiv>
+                <cmdsynopsis>
+                    <command>fcardsaver</command>
+                    <group choice="opt">
+                        <arg choice="plain">-root</arg>
+                        <arg choice="plain">-window <replaceable>window-id</replaceable></arg>
+                        <arg choice="plain">-setup</arg>
+                        <arg choice="plain">-demo</arg>
+                        <arg choice="plain">-help</arg>
+                    </group>
+                    <arg choice="opt"><replaceable class="option">Qt-options</replaceable></arg>
+                    <arg choice="opt">-caption <replaceable>title</replaceable></arg>
+                    <arg choice="opt">-icon <replaceable>icon</replaceable></arg>
+                    <arg choice="opt"><replaceable>qtoptions</replaceable></arg>
+                </cmdsynopsis>
+            </refsynopsisdiv>
+
+            <refsect1>
+                <title>Description</title>
+
+                <para><application>FCardSaver</application> is cross-platform
+                screensaver that displays "flash cards", tuples of connected
+                facts, in a table. It is written using Qt and should,
+                theoretically, be able to run on any platform supported by Qt;
+                however, only X11 and MS Windows versions are implemented.</para>
+
+                <para>Note that command line format specified in this manual is
+                    for X11 version only. Command line format for MS Windows
+                    version is mandated by Microsoft specification in
+                    <ulink url="http://support.microsoft.com/kb/182383"><citetitle>MS KB182383</citetitle></ulink>.</para>
+
+                <para>Initial goal of development was to devise a replacement
+                    for <application>kannasaver</application> (dropped from
+                    Ubuntu Maverick as unmaintained since 2007). In time,
+                    application extended to cover also functionality contained
+                    in <application>kanjisaver</application> (dropped from
+                    Ubuntu Natty), as well as more generic functionality.</para>
+
+                <para>Each flash card displayed by <application>FCardSaver</application>
+                    is a tuple of facts (textual fragments). Screen is divided
+                    into a rectangular grid and each fact is either displayed
+                    in one of cells, or omitted.</para>
+
+                <para>Flash cards are organized in sets, and each set may
+                    specify its own configuration parameters including step of
+                    the grid, background colour, default text colour for each
+                    cell, which fact is displayed in which cell, and so on.</para>
+
+                <para>Setup dialog for <application>FCardSaver</application>
+                    allows setting of default values for all configuration
+                    parameters. It also allows editing the list of flash card
+                    set files to display. Note that file paths are specified
+                    relative to flash card set base directory, unless they
+                    reside outside of it, in which case absolute paths are
+                    required.</para>
+
+                <para>Format of flash card set files is given in
+                    <citerefentry><refentrytitle>fcardsaver-cardset</refentrytitle><manvolnum>7</manvolnum></citerefentry>.</para>
+            </refsect1>
+
+            <refsect1>
+                <title>Options</title>
+
+                <variablelist>
+                    <varlistentry>
+                        <term><option>-root</option></term>
+                        <listitem><simpara>Displays the screensaver in the root
+                            window.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><option>-window <replaceable>window-id</replaceable></option></term>
+                        <listitem><simpara>Displays the screensaver in
+                            specified window.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><option>-demo</option></term>
+                        <listitem><simpara>Displays the screensaver in a new
+                            window. This is the default mode.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><option>-setup</option></term>
+                        <listitem><simpara>Displays screensaver configuration
+                            dialog.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><option>-help</option></term>
+                        <listitem><simpara>Prints short command synopsis and
+                            exits.</simpara></listitem>
+                    </varlistentry>
+                </variablelist>
+
+                <para>KDE-mandated options <option>-caption</option> and
+                    <option>-icon</option> are ignored. Note that
+                    <application>FCardSaver</application> doesn't link KDE
+                    libraries and, therefore, doesn't support complete set of
+                    KDE options.</para>
+
+                <para>Besides that, <application>FCardSaver</application> also
+                    supports all standard Qt options, as documented in
+                    <citerefentry><refentrytitle>qtoptions</refentrytitle><manvolnum>7</manvolnum></citerefentry>.</para>
+            </refsect1>
+
+            <refsect1>
+                <title>Files</title>
+
+                <variablelist>
+                    <varlistentry>
+                        <term><filename class="directory">~/.config/ALKOSoft/FCardSaver.conf</filename> (X11)</term>
+                        <term><property>HKCU\Software\ALKOSoft\FCardSaver\</property> (MS Windows)</term>
+                        <listitem><simpara>Location of <application>FCardSaver</application>
+                            configuration.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><filename class="directory">/usr/share/fcardsaver/</filename> (X11)</term>
+                        <term><filename class="directory"><envar>%CommonAppData%</envar>\ALKOSoft\FCardSaver\</filename> (MS Windows)</term>
+                        <listitem><simpara>Default data root directory.</simpara></listitem>
+                    </varlistentry>
+                </variablelist>
+            </refsect1>
+
+            <refsect1>
+                <title>Author</title>
+                <para>Alec Kojaev <email>alec@kojaev.name</email></para>
+            </refsect1>
+
+            <refsect1>
+                <title>See also</title>
+                <para><simplelist type="inline">
+                    <member><citerefentry><refentrytitle>X</refentrytitle><manvolnum>1</manvolnum></citerefentry></member>
+                    <member><citerefentry><refentrytitle>fcardsaver-config</refentrytitle><manvolnum>7</manvolnum></citerefentry></member>
+                    <member><citerefentry><refentrytitle>fcardsaver-cardset</refentrytitle><manvolnum>7</manvolnum></citerefentry></member>
+                </simplelist></para>
+            </refsect1>
+        </refentry>
+
+        <refentry>
+            <refmeta>
+                <refentrytitle>fcardsaver-config</refentrytitle>
+                <manvolnum>7</manvolnum>
+                <refmiscinfo class="source">fcardsaver</refmiscinfo>
+                <refmiscinfo class="manual">FCardSaver Manual</refmiscinfo>
+            </refmeta>
+
+            <refnamediv>
+                <refname>fcardsaver-config</refname>
+                <refpurpose>FCardSaver configuration parameters</refpurpose>
+            </refnamediv>
+
+            <refsect1>
+                <title>General information</title>
+
+                <para>This document lists configuration parameters supported by
+                    current version of <application>FCardSaver</application>.</para>
+
+                <para>Most <application>FCardSaver</application> configuration
+                    parameters (with the exception of the card set file list
+                    and the trace color) can be specified both in configuration
+                    (configuration file for X11 version or registry key for
+                    MS Windows version) and in a card set file. Syntax for
+                    specifying configuration parameters in a card set file is
+                    given in
+                    <citerefentry><refentrytitle>fcardsaver-cardset</refentrytitle><manvolnum>7</manvolnum></citerefentry>.</para>
+
+                <para>When a card is displayed, configuration parameters used
+                    for it are looked up in following order:
+                    <orderedlist>
+                        <listitem><simpara>Parameters specified in the same
+                            card set file prior to the card (the latest
+                            specification gets precedence).</simpara></listitem>
+                        <listitem><simpara>If this card set file is included
+                            into another file, parameters specified in the
+                            including file prior to the inclusion point (the
+                            latest specification gets precedence).</simpara></listitem>
+                        <listitem><simpara>Parameters specified in the
+                            configuration (configuration file or registry key).</simpara></listitem>
+                    </orderedlist></para>
+            </refsect1>
+        
+            <refsect1>
+                <title>Syntaxes</title>
+
+                <para>Values specified in the configuration parameters both in
+                    configuration file or registry, and in a card set file,
+                    belong to one of several types. In many cases format used
+                    by these types is dictated by the medium (for example,
+                    integer values in the regsitry use registry type REG_DWORD);
+                    nevertheless there are some situations where
+                    <application>FCardSaver</application> uses its own data
+                    formats on top of plain text strings. This section
+                    describes such syntaxes.</para>
+
+                <variablelist>
+                    <varlistentry>
+                        <term>Text strings</term>
+                        <listitem><simpara>Text strings in parameter values
+                            specified in a card set file use double-quote
+                            character ('"') for quoting and backslash character
+                            ('\') for escaping double-quote character inside
+                            the string. Any string containing whitespace,
+                            comma, or double-quote character, must be quoted.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>Floating-point values</term>
+                        <listitem><simpara>Floating-point numbers in parameter
+                            values specified in a card set file use dot
+                            character ('.') as fractional part separator.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>Color values</term>
+                        <listitem><simpara>Color values are specified as a text
+                            containing color name or color definition.</simpara>
+
+                        <simpara>Color definition is given as
+                            <literal>"#<replaceable>RGB</replaceable>"</literal>,
+                            where each of <replaceable>R</replaceable>,
+                            <replaceable>G</replaceable> and
+                            <replaceable>B</replaceable> is a hexadecimal number
+                            specifying corresponding color component (red,
+                            green, or blue). Numbers may contain from 1 to 4
+                            hexadecimal digits, but all components must use the
+                            same number of digits.</simpara>
+
+                        <simpara>Color name can be any of SVG color keyword
+                            names. In some cases additional values
+                            <literal>"transparent"</literal> and empty string
+                            are accepted to specify absence of color.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>Single-character values</term>
+                        <listitem><simpara>Single-character values (for example,
+                            card set file delimiter character) are specified
+                            as a text containing single character or character
+                            definition.</simpara>
+
+                        <simpara>Character definition is given as
+                            <literal>"#<replaceable>CCCC</replaceable>"</literal>,
+                            where <replaceable>CCCC</replaceable> is a
+                            hexadecimal Unicode code point number. For example,
+                            <literal>"#0009"</literal> specifies Unicode
+                            character "U+0009 CHARACTER TABULATION".</simpara></listitem>
+                    </varlistentry>
+                </variablelist>
+            </refsect1>
+
+            <refsect1>
+                <title>Common parameters</title>
+
+                <para>Parameters listed in this section are placed in section
+                    <property>[general]</property> of the configuration file
+                    (X11), or under registry subkey <property>"general\"</property>
+                    (MS Windows). Unless explicitly marked otherwise, they can
+                    be also specified in the card set file.</para>
+
+                <variablelist termlength="5" spacing="normal">
+                    <varlistentry>
+                        <term><command>background</command> <replaceable>color</replaceable></term>
+                        <listitem><simpara>Card background color. Default value
+                            is <literal>black</literal>.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><command>split-{x|y}</command> <replaceable>size</replaceable>,...</term>
+                        <listitem><simpara>Relative size of columns or rows of
+                            the card. Size can be specified in arbitrary units,
+                            so, say, <userinput>3,4,3</userinput> and
+                            <userinput>15,20,15</userinput> specify the same
+                            split. Default value for both splits is
+                            <literal>20,60,20</literal>.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><command>trace</command> <replaceable>color</replaceable> (config only)</term>
+                        <listitem><simpara>Cell trace color. Cell trace can
+                            used to debug card split. Default value is empty
+                            string (no trace).</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><command>period</command> <replaceable>msec</replaceable></term>
+                        <listitem><simpara>Card display time, in milliseconds.
+                            Default value is <literal>3000</literal> (3 sec).</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><command>data-root</command> <replaceable>path</replaceable> (config only)</term>
+                        <listitem><simpara>Path to directory used as a root for
+                            flash card set files. Default value depends on the
+                            platform.</simpara></listitem>
+                    </varlistentry>
+                </variablelist>
+            </refsect1>
+
+            <refsect1>
+                <title>Display parameters</title>
+
+                <para>Parameters listed in this section are placed under an
+                    array in section <property>[display]</property> of the
+                    configuration file (X11), or in registry subkey
+                    <property>"display\"</property> (MS Windows). Array is
+                    indexed by fact index, 1-based. If a card contains more
+                    facts than there are display parameter sets specified,
+                    the remaining facts will not be displayed.</para>
+
+                <variablelist>
+                    <varlistentry>
+                        <term><command>cell</command> <replaceable>cell-x</replaceable>,<replaceable>cell-y</replaceable></term>
+                        <listitem><simpara>Column and row of the cell where the
+                            fact will be displayed. Value <literal>-1</literal>
+                            for any coordinate marks the fact as not displayed.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><command>color</command> <replaceable>color</replaceable></term>
+                        <listitem><simpara>Specifies default text color for the
+                            displayed fact. Default value is
+                            <literal>white</literal>.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><command>font</command> <replaceable>font-family</replaceable></term>
+                        <listitem><simpara>Specifies default text font family
+                            for the displayed fact. Default value is
+                            <literal>Helvetica</literal>.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><command>lines</command> <replaceable>num-lines</replaceable></term>
+                        <listitem><simpara>Specifies approximate number of
+                            lines for the displayed fact. May be non-integer.
+                            If this parameter is specified and positive, its
+                            value is used to calculate initial default font
+                            size. Font size may be further decremented if the
+                            text of the fact doesn't fit in the cell. Default
+                            value is <literal>0</literal>.</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><command>pattern</command> <replaceable>pattern-text</replaceable></term>
+                        <listitem><simpara>Specifies fact text preprocessing
+                            pattern. Pattern is a non-empty text string
+                            containing sequence <literal>"%1"</literal>. If
+                            pattern is specified, each occurence of this
+                            sequence is replaced by the fact text, and the
+                            result is used instead of the original text.
+                            Default value is empty string (no pattern).</simpara></listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term><command>stylesheet</command> <replaceable>stylesheet-text</replaceable></term>
+                        <listitem><simpara>Specifies CSS stylesheet for the
+                            displayed fact. Only a subset of CSS supported by
+                            Qt library may be specified. Default value is empty
+                            string (use default stylesheet).</simpara></listitem>
+                    </varlistentry>
+                </variablelist>
+
+                <para>Display parameter sets may be also specified in the flash
+                    card set file using following syntax:</para>
+
+                <para><command>cell</command> <arg choice="plain"><replaceable
+                    >cell-x</replaceable>,<replaceable>cell-y</replaceable><arg
+                    choice="opt">,<replaceable>color</replaceable><arg
+                    choice="opt">,<replaceable>font-family</replaceable><arg
+                    choice="opt">,<replaceable>num-lines</replaceable><arg
+                    choice="opt">,<replaceable>pattern-text</replaceable><arg
+                    choice="opt">,<replaceable>stylesheet-text</replaceable></arg
+                    ></arg></arg></arg></arg></arg></para>
+            </refsect1>
+
+            <refsect1>
+                <title>Card sets list parameters</title>
+
+                <para>Parameters listed in this section are placed under an
+                    array in section <property>[cardsets]</property> of the
+                    configuration file (X11), or in registry subkey
+                    <property>"cardsets\"</property> (MS Windows).</para>
+
+                <para>Each array element contains two parameters,
+                    <command>path</command> and <command>separator</command>,
+                    specifying path to a flash card set file and delimiter
+                    character used by this file.</para>
+
+                <para>Both absolute and relative paths may be specified.
+                    Relative paths are resolved relative to data root path (see
+                    configuration parameter <command>data-root</command>).</para>
+            </refsect1>
+
+            <refsect1>
+                <title>Card set file inclusion</title>
+
+                <para>Flash card set file may include another flash card set
+                    file. Such inclusion uses following parameter syntax:</para>
+
+                <para><command>include</command> <arg choice="plain"><replaceable
+                    >file-path</replaceable>,<replaceable>delim-char</replaceable></arg></para>
+
+                <para>Path to the included file may be specified relative to
+                    the including file, or as an absolute path.</para>
+
+                <para>Note that file inclusion is inheriting; that means that
+                    configuration parameters specified in the including file
+                    continue to work on the included file, unless explicitly
+                    overridden.</para>
+            </refsect1>
+
+            <refsect1>
+                <title>Parameter protection</title>
+
+                <para>Flash card set file may include parameter protection
+                    instuction using following syntax:</para>
+
+                <para><command>protect</command> <group choice="plain"><arg choice="plain"
+                    ><literal>on</literal></arg><arg choice="plain"
+                    ><literal>off</literal></arg></group>,<replaceable>command</replaceable
+                    >,...</para>
+
+                <para>Parameter protection instuction enables or disables
+                    protection on specified commands. If a command is protected,
+                    any attempts to specify it will be ignored until it is
+                    explicitly unprotected, or to the end of the file where
+                    protection instruction is specified. Protection expands to
+                    files included when protection is enabled. Command
+                    <command>protect</command> itself cannot be protected.</para>
+            </refsect1>
+
+            <refsect1>
+                <title>Author</title>
+                <para>Alec Kojaev <email>alec@kojaev.name</email></para>
+            </refsect1>
+
+            <refsect1>
+                <title>See also</title>
+                <para><simplelist type="inline">
+                    <member><citerefentry><refentrytitle>fcardsaver</refentrytitle><manvolnum>6x</manvolnum></citerefentry></member>
+                    <member><citerefentry><refentrytitle>fcardsaver-cardset</refentrytitle><manvolnum>7</manvolnum></citerefentry></member>
+                </simplelist></para>
+            </refsect1>
+
+        </refentry>
+    
+        <refentry>
+            <refmeta>
+                <refentrytitle>fcardsaver-cardset</refentrytitle>
+                <manvolnum>7</manvolnum>
+                <refmiscinfo class="source">fcardsaver</refmiscinfo>
+                <refmiscinfo class="manual">FCardSaver Manual</refmiscinfo>
+            </refmeta>
+
+            <refnamediv>
+                <refname>fcardsaver-cardset</refname>
+                <refpurpose>FCardSaver card set file structure</refpurpose>
+            </refnamediv>
+
+            <refsect1>
+                <title>Overview</title>
+
+                <para><application>FCardSaver</application> card set file
+                    format is based on format of plain text files supported by
+                    <application>Anki</application> import function. In fact,
+                    any <application>FCardSaver</application> card set file
+                    will be accepted as valid by <application>Anki</application>.</para>
+
+                <para>A card set file is a plain text file in UTF-8 encoding.
+                    Any line starting with hash sign ("#") is a comment; all
+                    comments except those starting with "#FCARD#" are ignored
+                    (see below). Each non-comment line except, optionally, the
+                    first non-comment line, contains delimiter-separated values
+                    with quoting and escaping rules defined by
+                    <citation>RFC 4180</citation> (CSV).</para>
+
+                <para>Card set files shipped with <application>FCardSaver</application>
+                    usually are tab-separated, but any single-character
+                    separator is supported. Unlike <application>Anki</application>,
+                    <application>FCardSaver</application> doesn't try to guess
+                    the separator, but expects the user to specify the
+                    separator for each file in the configuration dialog.</para>
+            </refsect1>
+
+            <refsect1>
+                <title>Cards</title>
+
+                <para>Each line of delimiter-separated values defines a "card",
+                    a tuple of text fields. Each text block is interpreted as
+                    a HTML fragment, using a subset of HTML supported by Qt
+                    library.</para>
+
+                <para>Delimiter-separated values use quoting and escaping rules
+                    from the CSV standard. Each field that contains
+                    double-quote character, separator character, or explicit
+                    line break, must be enclosed in double-quotes, with all
+                    internal double-quote characters escaped as double
+                    double-quote ('""').</para>
+
+                <para>All explicit line breaks within quoted fields are
+                    replaced by HTML tag <literal>&lt;br&gt;</literal>.</para>
+            </refsect1>
+
+            <refsect1>
+                <title>Optional tags line</title>
+
+                <para>If the first non-comment line in the card set file starts
+                    with prefix <literal>tags:</literal>, it is not split
+                    according to the general rules. Instead, the remaining part
+                    of string after the prefix is split by whitespace, and the
+                    resulting list of words is interpreted as "tags" to be
+                    added to the end of each card. That is, file
+
+                    <informalexample><programlisting>
+                    tags: family relationship
+                    pater,father
+                    mater,mother
+                    filius,son
+                    </programlisting></informalexample>
+
+                    is equivalent to file
+
+                    <informalexample><programlisting>
+                    pater,father,family,relationship
+                    mater,mother,family,relationship
+                    filius,son,family,relationship
+                    </programlisting></informalexample>
+                </para>
+            </refsect1>
+
+            <refsect1>
+                <title>FCardSaver-specific comments</title>
+
+                <para>Comment lines that start with <literal>#FCARD#</literal>
+                    are interpreted by <application>FCardSaver</application>.
+                    Remaining part of the line is separated by whitespace into
+                    two fields: parameter name and parameter value. Parameter
+                    value is further split into parts by commas.</para>
+
+                <para>Complete list of supported parameters and their values is
+                    given in
+                    <citerefentry><refentrytitle>fcardsaver-config</refentrytitle><manvolnum>7</manvolnum></citerefentry>.</para>
+            </refsect1>
+
+            <refsect1>
+                <title>Author</title>
+                <para>Alec Kojaev <email>alec@kojaev.name</email></para>
+            </refsect1>
+
+            <refsect1>
+                <title>See also</title>
+                <para><simplelist type="inline">
+                    <member><citerefentry><refentrytitle>fcardsaver</refentrytitle><manvolnum>6x</manvolnum></citerefentry></member>
+                    <member><citerefentry><refentrytitle>fcardsaver-config</refentrytitle><manvolnum>7</manvolnum></citerefentry></member>
+                </simplelist></para>
+            </refsect1>
+        </refentry>
+    </appendix>
 </book>

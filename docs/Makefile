@@ -2,7 +2,7 @@ ifndef PLATFORM
     include ../platform.mk
 endif
 BUILD_DIR := ../build/docs
-MANPAGES := fcardsaver.6x fcardsaver-cardset.7
+MANPAGES := fcardsaver.6x fcardsaver-cardset.7 fcardsaver-config.7
 MANFILES := $(addprefix $(BUILD_DIR)/,$(MANPAGES))
 MANGZFILES := $(addsuffix .gz,$(MANFILES))
 HTMLDOC := $(BUILD_DIR)/fcardsaver-manual.html
