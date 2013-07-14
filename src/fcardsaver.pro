@@ -1,12 +1,12 @@
-#-------------------------------------------------
 #
-# Project created by QtCreator 2012-08-30T16:42:18
+# FCardSaver QT project file
 #
-#-------------------------------------------------
 
-QT       += core gui
+QT += core gui
 greaterThan(QT_MAJOR_VERSION, 4) {
-    QT   += widgets
+    QT      += widgets
+    DEFINES += HAVE_XCB
+    contains(QT_CONFIG,c++11): CONFIG += c++11
 }
 
 TARGET = fcardsaver

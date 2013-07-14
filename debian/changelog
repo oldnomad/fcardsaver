@@ -1,3 +1,21 @@
+fcardsaver (1.2.5) precise; urgency=low
+
+  * Win32 build documentation corrections, removed trailing spaces from several files.
+  * New control for 'data-root' configuration parameter; fixes #3.
+  * Updated Hanazono font URL for Win32 build to version 2013-02-22.
+  * Fixes and additions in BUILD.win32 file.
+  * Ignore QtCreator-created configuration and extra Win32 build scripts.
+  * Win32 example build script now accepts additional make parameters.
+  * Ignore subdirectory web/ (used for gh-pages).
+  * Fix Win32 headers for SHGetFolderPath() (MinGW 4.7 removed it from <shlwapi.h>).
+  * Removed deprecated qVariantValue() and qVariantCanConvert() calls.
+  * Change NSIS script to use "libraries.list" for list of files to install/delete (closes issue #6).
+  * Implemented new flashcard file instruction "protect" (closes issue #4).
+  * Documentation on configuration parameters is split into a separate manpage.
+  * Initial set of changes in preparation to Qt5.
+
+ -- Alec Kojaev <alec@kojaev.name>  Sun, 14 Jul 2013 21:18:57 +0400
+
 fcardsaver (1.2.4) precise; urgency=low
 
   * Kanji flash cards now include nanori readings.

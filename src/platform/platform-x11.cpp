@@ -2,8 +2,35 @@
 
 #ifdef Q_OS_UNIX
 
+#ifdef HAVE_XCB
+
+#include <xcb/xcb.h>
+
+static inline WId get_root_window()
+{
+    xcb_connection_t *c;
+    xcb_screen_t *screen;
+    xcb_window_t wnd;
+    int scrnum;
+
+    c = xcb_connect(0, &scrnum);
+    screen = screen_of_display(c, scrnum);
+    wnd = screen ? screen->root : 0;
+    xcb_disconnect(c);
+    return wnd;
+}
+
+#else
+
 #include <QX11Info>
 #include "platform/vroot.h"
+
+static inline WId get_root_window()
+{
+    return DefaultRootWindow(QX11Info::display());
+}
+
+#endif
 
 const CmdOption::parse_t startup_t::OPT_PARSE = {
     QList<CmdOption>() <<
@@ -47,7 +74,7 @@ bool startup_t::parse_arg(const CmdOption::arghash_t &argval)
     }
     if (argval.contains("root"))
     {
-        m_window = m_root = DefaultRootWindow(QX11Info::display());
+        m_window = m_root = get_root_window();
         m_mode = SS_MODE_START;
         return true;
     }
