@@ -440,7 +440,7 @@
 
                 <variablelist>
                     <varlistentry>
-                        <term><command>cell</command> <replaceable>cell-x</replaceable>,<replaceable>cell-y</replaceable></term>
+                        <term><command>cell</command> <replaceable>x</replaceable>,<replaceable>y</replaceable></term>
                         <listitem><simpara>Column and row of the cell where the
                             fact will be displayed. Value <literal>-1</literal>
                             for any coordinate marks the fact as not displayed.</simpara></listitem>
@@ -452,7 +452,7 @@
                             <literal>white</literal>.</simpara></listitem>
                     </varlistentry>
                     <varlistentry>
-                        <term><command>font</command> <replaceable>font-family</replaceable></term>
+                        <term><command>font</command> <replaceable>font</replaceable></term>
                         <listitem><simpara>Specifies default text font family
                             for the displayed fact. Default value is
                             <literal>Helvetica</literal>.</simpara></listitem>
@@ -468,7 +468,7 @@
                             value is <literal>0</literal>.</simpara></listitem>
                     </varlistentry>
                     <varlistentry>
-                        <term><command>pattern</command> <replaceable>pattern-text</replaceable></term>
+                        <term><command>pattern</command> <replaceable>pattern</replaceable></term>
                         <listitem><simpara>Specifies fact text preprocessing
                             pattern. Pattern is a non-empty text string
                             containing sequence <literal>"%1"</literal>. If
@@ -478,7 +478,7 @@
                             Default value is empty string (no pattern).</simpara></listitem>
                     </varlistentry>
                     <varlistentry>
-                        <term><command>stylesheet</command> <replaceable>stylesheet-text</replaceable></term>
+                        <term><command>stylesheet</command> <replaceable>stylesheet</replaceable></term>
                         <listitem><simpara>Specifies CSS stylesheet for the
                             displayed fact. Only a subset of CSS supported by
                             Qt library may be specified. Default value is empty
@@ -490,12 +490,12 @@
                     card set file using following syntax:</para>
 
                 <para><command>cell</command> <arg choice="plain"><replaceable
-                    >cell-x</replaceable>,<replaceable>cell-y</replaceable><arg
+                    >x</replaceable>,<replaceable>y</replaceable><arg
                     choice="opt">,<replaceable>color</replaceable><arg
-                    choice="opt">,<replaceable>font-family</replaceable><arg
+                    choice="opt">,<replaceable>font</replaceable><arg
                     choice="opt">,<replaceable>num-lines</replaceable><arg
-                    choice="opt">,<replaceable>pattern-text</replaceable><arg
-                    choice="opt">,<replaceable>stylesheet-text</replaceable></arg
+                    choice="opt">,<replaceable>pattern</replaceable><arg
+                    choice="opt">,<replaceable>stylesheet</replaceable></arg
                     ></arg></arg></arg></arg></arg></para>
             </refsect1>
 
