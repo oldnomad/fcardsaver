@@ -14,12 +14,11 @@ katakana-ext.tsv
 
     Extended hiragana and katakana syllabary: signs with dakuten, handakuten,
     and youon, used for Japanese language. Includes obsolete closed youon
-    (KWA, GWA). Does not include Ryukyuan/Okinawan KWI, KWE, GWI, GWE, HWA,
-    HWI, HWE.
+    (KWA, GWA). Does not include Ryukyuan/Okinawan and Ainu extensions.
 
 hiragana-alien.tsv
 
-    Phonetic extensions to hiragana: NG-column, vu (v-).
+    Phonetic extensions to hiragana: NG-column, VU (V-).
 
 katakana-alien.tsv
 

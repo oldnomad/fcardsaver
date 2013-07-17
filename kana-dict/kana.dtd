@@ -1,0 +1,64 @@
+<!--
+  == DTD for Japanese kana XML file
+  ==
+  == The list is contained in root element "kana".
+  -->
+<!ELEMENT kana  (mod*,ch*)>
+<!--
+  == Modifier definition tag
+  ==
+  == Modifiers are voicing diacritics (dakuten and handakuten) and small kana
+  == used for youon.
+  ==
+  == Attributes "hiragana" and "katakana" contain hiragana and katakana forms
+  == of the modifier.
+  ==
+  == Attribute "mark" contains modifier mark. Dakuten (mark "d") and handakuten
+  == (mark "h") have single-character marks. Small kana for youon have marks
+  == containing their full-kana readings.
+  -->
+<!ELEMENT mod   EMPTY>
+<!ATTLIST mod
+    hiragana    CDATA   #REQUIRED
+    katakana    CDATA   #REQUIRED
+    mark        CDATA   #REQUIRED>
+<!--
+  == Kana sign definition tag
+  ==
+  == Attributes "hiragana" and "katakana" contain hiragana and katakana forms
+  == of the sign.
+  ==
+  == Tag contains a set of romaji readings.
+  -->
+<!ELEMENT ch    (r*)>
+<!ATTLIST ch
+    hiragana    CDATA   #IMPLIED
+    katakana    CDATA   #IMPLIED>
+<!--
+  == Romaji reading tag
+  ==
+  == Tag contains a romaji reading of the sign with modifiers specified in the
+  == attributes. See below.
+  ==
+  == Attribute "mark", if specified, contains voicing modifier mark: dakuten
+  == ("d") or handakuten ("h"). The reading contains corresponding voiced or
+  == half-voiced consonant.
+  ==
+  == Attribute "youon", if specified, contains youon mode: open ("y") or closed
+  == ("w"). The reading contains youon reading without the vowel, e.g. ni -> ny.
+  ==
+  == Attribute "katakana", if not empty, means that the reading is only valid
+  == in katakana. Corresponding combination will be omitted in generating
+  == hiragana dictionaries. This is typical for Ainu kana.
+  ==
+  == Attribute "set", if specified, contains name of a non-standard set to
+  == which this combination belongs. Note that set "ext" ("hiragana-ext" and
+  == "katakana-ext") is generated automatically from all combinations with
+  == voicing marks or youon that do not specify another set.
+  -->
+<!ELEMENT r     (#PCDATA)>
+<!ATTLIST r
+    mark        CDATA   #IMPLIED
+    youon       CDATA   #IMPLIED
+    katakana    CDATA   #IMPLIED
+    set         CDATA   #IMPLIED>

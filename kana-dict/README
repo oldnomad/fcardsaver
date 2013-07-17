@@ -1,34 +1,19 @@
 KANA Conversion Tools
 =====================
 
-Scripts in this directory are used to convert kana CSV file into a set of
+Scripts in this directory are used to convert kana XML file into a set of
 tab-separated text dictionary files compatible with FCardSaver.
 
 Prerequisites for running the tools are:
 
    - Perl 5 or higher with installed modules "Unicode::Normalize" and
      "Text::CSV_XS".
+   - xsltproc tool from LibXSLT library, supporting EXSLT extensions
+     <http://exslt.org/strings> and <http://exslt.org/functions>.
 
 If you want to update the dictionaries, do following:
 
-   1. Modify "kana.tsv" file.
-   2. Run script "build-kana.pl" with argument specifying destination
-      directory.
+   1. Modify "kana.xml" file. Its structure is described in comments in
+      corresponding DTD file "kana.dtd".
 
-File "kana.tsv" contains following columns:
-
-   1. Hiragana character.
-   2. Katakana character.
-   3. Latin transliterations for naked character, character with dakuten mark,
-      character with handakuten mark (if applicable).
-   4. Latin transliterations for open yoon (-y-) without vowel: naked character,
-      character with dakuten mark, character with handakuten mark (if
-      applicable).
-   5. Latin transliterations for closed yoon (-w-) without vowel: naked
-      character, character with dakuten mark, character with handakuten mark
-      (if applicable).
-
-   Latin transliterations are separated by pipe ('|') characters. Prefix
-   ampersand ('&') character means that this combination occurs only in
-   katakana. Prefix exclamation mark ('!') means that this is an alien
-   combination (e.g. used for Ainu language).
+   2. Run script "make".

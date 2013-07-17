@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE kana SYSTEM "kana.dtd">
+<kana>
+    <!-- Modifiers -->
+    <mod hiragana="&#x3099;" katakana="&#x3099;" mark="d"/>
+    <mod hiragana="&#x309a;" katakana="&#x309a;" mark="h"/>
+    <mod hiragana="&#x3083;" katakana="&#x30e3;" mark="ya"/>
+    <mod hiragana="&#x3085;" katakana="&#x30e5;" mark="yu"/>
+    <mod hiragana="&#x3087;" katakana="&#x30e7;" mark="yo"/>
+    <mod hiragana="&#x308e;" katakana="&#x30ee;" mark="wa"/>
+    <!-- Vowels column -->
+    <ch hiragana="あ" katakana="ア">
+        <r>a</r>
+    </ch>
+    <ch hiragana="い" katakana="イ">
+        <r>i</r>
+    </ch>
+    <ch hiragana="う" katakana="ウ">
+        <r>u</r>
+        <r mark="d" set="alien">*v[u]</r>
+    </ch>
+    <ch hiragana="え" katakana="エ">
+        <r>e</r>
+    </ch>
+    <ch hiragana="お" katakana="オ">
+        <r>o</r>
+    </ch>
+    <!-- KA-column -->
+    <ch hiragana="か" katakana="カ">
+        <r>ka</r>
+        <r mark="d">ga</r>
+        <r mark="h" set="alien">*nga</r>
+    </ch>
+    <ch hiragana="き" katakana="キ">
+        <r>ki</r>
+        <r mark="d">gi</r>
+        <r mark="h" set="alien">*ngi</r>
+        <r youon="y">ky</r>
+        <r youon="y" mark="d">gy</r>
+    </ch>
+    <ch hiragana="く" katakana="ク">
+        <r>ku</r>
+        <r mark="d">gu</r>
+        <r mark="h" set="alien">*ngu</r>
+        <r youon="w">*kw</r>
+        <r youon="w" mark="d">*gw</r>
+    </ch>
+    <ch hiragana="け" katakana="ケ">
+        <r>ke</r>
+        <r mark="d">ge</r>
+        <r mark="h" set="alien">*nge</r>
+    </ch>
+    <ch hiragana="こ" katakana="コ">
+        <r>ko</r>
+        <r mark="d">go</r>
+        <r mark="h" set="alien">*ngo</r>
+    </ch>
+    <!-- SA-column -->
+    <ch hiragana="さ" katakana="サ">
+        <r>sa</r>
+        <r mark="d">za</r>
+    </ch>
+    <ch hiragana="し" katakana="シ">
+        <r>shi</r>
+        <r mark="d">ji</r>
+        <r youon="y">sh</r>
+        <r youon="y" mark="d">j</r>
+    </ch>
+    <ch hiragana="す" katakana="ス">
+        <r>su</r>
+        <r mark="d">zu</r>
+        <r youon="w" katakana="k" set="alien">*sw</r>
+        <r youon="w" mark="d" katakana="k" set="alien">*zw</r>
+    </ch>
+    <ch hiragana="せ" katakana="セ">
+        <r>se</r>
+        <r mark="d">ze</r>
+        <r mark="h" katakana="k" set="alien">*tse</r>
+    </ch>
+    <ch hiragana="そ" katakana="ソ">
+        <r>so</r>
+        <r mark="d">zo</r>
+    </ch>
+    <!-- TA-column -->
+    <ch hiragana="た" katakana="タ">
+        <r>ta</r>
+        <r mark="d">da</r>
+    </ch>
+    <ch hiragana="ち" katakana="チ">
+        <r>chi</r>
+        <r mark="d">dji</r>
+        <r youon="y">ch</r>
+        <r youon="y" mark="d">dj</r>
+    </ch>
+    <ch hiragana="つ" katakana="ツ">
+        <r>tsu</r>
+        <r mark="d">dzu</r>
+        <r mark="h" katakana="k" set="alien">*tu</r>
+    </ch>
+    <ch hiragana="て" katakana="テ">
+        <r>te</r>
+        <r mark="d">de</r>
+    </ch>
+    <ch hiragana="と" katakana="ト">
+        <r>to</r>
+        <r mark="d">do</r>
+        <r mark="h" katakana="k" set="alien">*tu</r>
+    </ch>
+    <!-- NA-column -->
+    <ch hiragana="な" katakana="ナ">
+        <r>na</r>
+    </ch>
+    <ch hiragana="に" katakana="二">
+        <r>ni</r>
+        <r youon="y">ny</r>
+    </ch>
+    <ch hiragana="ぬ" katakana="ヌ">
+        <r>nu</r>
+    </ch>
+    <ch hiragana="ね" katakana="ネ">
+        <r>ne</r>
+    </ch>
+    <ch hiragana="の" katakana="ノ">
+        <r>no</r>
+    </ch>
+    <!-- HA-column -->
+    <ch hiragana="は" katakana="ハ">
+        <r>ha</r>
+        <r mark="d">ba</r>
+        <r mark="h">pa</r>
+    </ch>
+    <ch hiragana="ひ" katakana="ヒ">
+        <r>hi</r>
+        <r mark="d">bi</r>
+        <r mark="h">pi</r>
+        <r youon="y">hy</r>
+        <r youon="y" mark="d">by</r>
+        <r youon="y" mark="h">py</r>
+    </ch>
+    <ch hiragana="ふ" katakana="フ">
+        <r>fu</r>
+        <r mark="d">bu</r>
+        <r mark="h">pu</r>
+        <r youon="w" katakana="k" set="alien">*hw</r>
+    </ch>
+    <ch hiragana="へ" katakana="ヘ">
+        <r>he</r>
+        <r mark="d">be</r>
+        <r mark="h">pe</r>
+    </ch>
+    <ch hiragana="ほ" katakana="ホ">
+        <r>ho</r>
+        <r mark="d">bo</r>
+        <r mark="h">po</r>
+    </ch>
+    <!-- MA-column -->
+    <ch hiragana="ま" katakana="マ">
+        <r>ma</r>
+    </ch>
+    <ch hiragana="み" katakana="ミ">
+        <r>mi</r>
+        <r youon="y">my</r>
+    </ch>
+    <ch hiragana="む" katakana="ム">
+        <r>mu</r>
+    </ch>
+    <ch hiragana="め" katakana="メ">
+        <r>me</r>
+    </ch>
+    <ch hiragana="も" katakana="モ">
+        <r>mo</r>
+    </ch>
+    <!-- YA-column -->
+    <ch hiragana="や" katakana="ヤ">
+        <r>ya</r>
+    </ch>
+    <ch hiragana="ゆ" katakana="ユ">
+        <r>yu</r>
+    </ch>
+    <ch hiragana="よ" katakana="ヨ">
+        <r>yo</r>
+    </ch>
+    <!-- RA-column -->
+    <ch hiragana="ら" katakana="ラ">
+        <r>ra</r>
+    </ch>
+    <ch hiragana="り" katakana="リ">
+        <r>ri</r>
+        <r youon="y">ry</r>
+    </ch>
+    <ch hiragana="る" katakana="ル">
+        <r>ru</r>
+    </ch>
+    <ch hiragana="れ" katakana="レ">
+        <r>re</r>
+    </ch>
+    <ch hiragana="ろ" katakana="ロ">
+        <r>ro</r>
+    </ch>
+    <!-- WA-column -->
+    <ch hiragana="わ" katakana="ワ">
+        <r>wa</r>
+        <r mark="d" katakana="k" set="alien">*va</r>
+    </ch>
+    <ch hiragana="ゐ" katakana="ヰ">
+        <r>*wi</r>
+        <r mark="d" katakana="k" set="alien">*vi</r>
+    </ch>
+    <ch hiragana="ゑ" katakana="ヱ">
+        <r>*we</r>
+        <r mark="d" katakana="k" set="alien">*ve</r>
+    </ch>
+    <ch hiragana="を" katakana="ヲ">
+        <r>wo</r>
+        <r mark="d" katakana="k" set="alien">*vo</r>
+    </ch>
+    <!-- Moraic N -->
+    <ch hiragana="ん" katakana="ン">
+        <r>n</r>
+    </ch>
+</kana>

@@ -3,15 +3,19 @@ ifndef PLATFORM
 endif
 OBJDIR := ../build/dict
 CARDDIR := $(DESTDIR)/usr/share/fcardsaver/
+DICTALL := $(OBJDIR)/kana.tsv
 DICTS := hiragana katakana hiragana-ext katakana-ext hiragana-alien katakana-alien
 DICTNAMES := $(addsuffix .tsv,$(DICTS))
 DICTFILES := $(addprefix $(OBJDIR)/,$(DICTNAMES))
 
 all: $(DICTFILES)
 
-$(DICTFILES): kana.tsv hiragana.header katakana.header
+$(DICTALL): kana.xml hiragana.header katakana.header
 	$(MKDIR) "$(OBJDIR)"
-	$(PERL) -w build-kana.pl $(OBJDIR)
+	$(XSLTPROC) -o "$@" kana.xslt kana.xml
+
+$(DICTFILES): $(DICTALL)
+	$(PERL) -w split-kana.pl "$(DICTALL)" '$(OBJDIR)/%s.tsv'
 
 install: $(DICTFILES)
 	$(MKDIR) "$(CARDDIR)"
@@ -22,6 +26,6 @@ uninstall:
 	$(RMDIR) "$(CARDDIR)"
 
 clean distclean:
-	$(DELETE_FILE) $(DICTFILES)
+	$(DELETE_FILE) $(DICTFILES) $(DICTALL)
 
 .PHONY: all install uninstall clean distclean
