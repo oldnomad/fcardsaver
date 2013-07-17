@@ -2,6 +2,7 @@ fcardsaver (1.2.6) UNRELEASED; urgency=low
 
   * Redesign generation of kana dictionaries to use more versatile XML.
   * Fix overlong line in fcardsaver-config(7) man page.
+  * Automatic generation of version information from changelog (Win32).
 
  -- Alec Kojaev <alec@kojaev.name>  Wed, 17 Jul 2013 22:52:50 +0400
 

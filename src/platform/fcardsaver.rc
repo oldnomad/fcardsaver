@@ -1,5 +1,6 @@
 #include <scrnsave.h>
 #include <winver.h>
+#include "../../version.h"
 
 STRINGTABLE
 BEGIN
@@ -9,8 +10,8 @@ END
 ID_APP ICON "fcardsaver.ico"
 
 VS_VERSION_INFO VERSIONINFO
-    FILEVERSION     1,2,3,1
-    PRODUCTVERSION  1,2,3,1
+    FILEVERSION     VERSION_LIST
+    PRODUCTVERSION  VERSION_LIST
     FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
 #ifdef _DEBUG
     FILEFLAGS       VS_FF_DEBUG
@@ -27,11 +28,11 @@ BEGIN
         BEGIN
             VALUE   "CompanyName", "ALKOSoft"
             VALUE   "FileDescription", "Flash Card Screensaver"
-            VALUE   "FileVersion", "1.2.3.1"
-            VALUE   "LegalCopyright", "(c) Alec Kojaev, 2012"
+            VALUE   "FileVersion", VERSION_STRING
+            VALUE   "LegalCopyright", "(c) Alec Kojaev, 2012-2013"
             VALUE   "OriginalFilename", "fcardsaver.scr"
             VALUE   "ProductName", "Flash Card Screensaver"
-            VALUE   "ProductVersion", "1.2.3.1"
+            VALUE   "ProductVersion", VERSION_STRING
         END
     END
     BLOCK "VarFileInfo"

@@ -44,8 +44,11 @@ dict-distclean: $(DICTDCLEAN)
 #
 exec-build: $(EXEPATH)/$(EXEFILE)
 
-src/$(EXEMAKEFILE): src/fcardsaver.pro
+src/$(EXEMAKEFILE): src/fcardsaver.pro version.h
 	cd src && $(QMAKE) -makefile "CONFIG += debug_and_release" fcardsaver.pro -r -spec $(QTSPEC)
+
+version.h: debian/changelog
+	$(PERL) -w genversion.pl >"$@"
 
 $(EXEPATH)/$(EXEFILE): src/$(EXEMAKEFILE)
 	$(MKDIR) "$(EXEPATH)"
@@ -62,6 +65,7 @@ exec-clean: src/$(EXEMAKEFILE)
 
 exec-distclean: src/$(EXEMAKEFILE)
 	$(MAKE) -C src -f $(EXEMAKEFILE) distclean
+	rm version.h
 
 #
 # Manual and docs
