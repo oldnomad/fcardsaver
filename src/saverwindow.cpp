@@ -146,10 +146,9 @@ void SaverWindow::paintText(QPainter* paint, const paint_context &ctxt,
     }
     QString altText = text;
     QString pattern = disp.pattern();
-    // TODO: More intelligent pattern for plain text
     if (!pattern.isEmpty())
         altText = pattern.arg(text);
-    else if (!text.startsWith('<') || !text.endsWith('>'))
+    else
         altText = SaverSettings::PLAINTEXT_PATTERN.arg(text);
     doc.setHtml(altText);
     QSizeF csize = clip.size()*SaverSettings::TEXTCELL_SCALE;
