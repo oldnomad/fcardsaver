@@ -1,4 +1,8 @@
 #!/usr/bin/perl -w
+#
+# This script attempts to extract current version number from Debian changelog
+# and formats it into C-style #defines.
+#
 use warnings;
 
 open CHGLOG, '<', 'debian/changelog' or die "$!";
