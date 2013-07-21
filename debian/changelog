@@ -4,6 +4,7 @@ fcardsaver (1.2.6) UNRELEASED; urgency=low
   * Fix overlong line in fcardsaver-config(7) man page.
   * Automatic generation of version information from changelog (Win32).
   * Removed non-working HTML text test; now any text, HTML or not, is embeeded into <span></span>.
+  * Unified splitting for kana and kanjidic2 dictionaries.
 
  -- Alec Kojaev <alec@kojaev.name>  Wed, 17 Jul 2013 22:52:50 +0400
 

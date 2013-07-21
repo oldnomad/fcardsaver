@@ -24,7 +24,7 @@ $(DICTFILE_ALL): kanjidic2.header kanjidic2.xslt kanjidic2.xml.gz
 	$(GZIP) -d -c kanjidic2.xml.gz | $(XSLTPROC) -o "$@" kanjidic2.xslt -
 
 $(DICTFILES): $(DICTFILE_ALL)
-	$(PERL) -w split-kanji.pl $(DICTFILE_ALL) '$(OBJDIR)/kanjidic2-%s.tsv' $(DICTS)
+	$(PERL) -w ../split-tsv.pl $(DICTFILE_ALL) "$(OBJDIR)" kanjidic2.cfg
 
 install: $(DICTFILE_ALL) $(DICTFILES)
 	$(MKDIR) "$(CARDDIR)"

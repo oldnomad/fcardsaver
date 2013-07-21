@@ -87,6 +87,10 @@
     <xsl:param name="text"></xsl:param>
     <xsl:param name="kana"></xsl:param>
     <xsl:param name="set"></xsl:param>
+    <xsl:variable name="mode"><xsl:choose>
+        <xsl:when test="$set = &quot;&quot;"><xsl:value-of select="local:kana-name($kana)"/></xsl:when>
+        <xsl:otherwise><xsl:value-of select="local:kana-name($kana)"/>-<xsl:value-of select="$set"/></xsl:otherwise>
+    </xsl:choose></xsl:variable>
     <xsl:value-of select="$ch"/>
     <xsl:value-of select="$separator"/>
     <xsl:value-of select="$quote"/>
@@ -94,11 +98,7 @@
     <xsl:value-of select="$quote"/>
     <xsl:value-of select="$separator"/>
     <xsl:value-of select="$quote"/>
-    <xsl:value-of select="local:escape-quoted(local:kana-name($kana))"/>
-    <xsl:value-of select="$quote"/>
-    <xsl:value-of select="$separator"/>
-    <xsl:value-of select="$quote"/>
-    <xsl:value-of select="local:escape-quoted($set)"/>
+    <xsl:value-of select="local:escape-quoted($mode)"/>
     <xsl:value-of select="$quote"/>
     <xsl:value-of select="$newline"/>
 </xsl:template>
