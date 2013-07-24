@@ -43,6 +43,10 @@
 #          - "header:" with lowercase initial element of "mode list".
 #          - Default "header".
 #
+#       For example, if mode is "Kanji-G1", the script will look for
+#       parameters "header:kanji-g1", "header:kanji" and "header", in that
+#       order.
+#
 #       The value of this parameter, if specified and not "*", is used with
 #       suffix ".header" as a file name of the header file to use. All lines
 #       from this file will be included in the beginning of the output file.
