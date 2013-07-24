@@ -15,7 +15,7 @@ $(DICTALL): kana.xml hiragana.header katakana.header
 	$(XSLTPROC) -o "$@" kana.xslt kana.xml
 
 $(DICTFILES): $(DICTALL)
-	$(PERL) -w ../split-tsv.pl "$(DICTALL)" '$(OBJDIR)' kana.cfg
+	$(PERL) -w ../split-tsv.pl "$(DICTALL)" "$(OBJDIR)" kana.cfg
 
 install: $(DICTFILES)
 	$(MKDIR) "$(CARDDIR)"
